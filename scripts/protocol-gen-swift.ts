@@ -20,7 +20,7 @@ const outPaths = [
     repoRoot,
     "apps",
     "shared",
-    "OpenClawKit",
+    "BlockClawKit",
     "Sources",
     "OpenClawProtocol",
     "GatewayModels.swift",

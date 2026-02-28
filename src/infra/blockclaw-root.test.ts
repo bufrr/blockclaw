@@ -90,12 +90,12 @@ vi.mock("node:fs/promises", async (importOriginal) => {
 });
 
 describe("resolveOpenClawPackageRoot", () => {
-  let resolveOpenClawPackageRoot: typeof import("./openclaw-root.js").resolveOpenClawPackageRoot;
-  let resolveOpenClawPackageRootSync: typeof import("./openclaw-root.js").resolveOpenClawPackageRootSync;
+  let resolveOpenClawPackageRoot: typeof import("./blockclaw-root.js").resolveOpenClawPackageRoot;
+  let resolveOpenClawPackageRootSync: typeof import("./blockclaw-root.js").resolveOpenClawPackageRootSync;
 
   beforeAll(async () => {
     ({ resolveOpenClawPackageRoot, resolveOpenClawPackageRootSync } =
-      await import("./openclaw-root.js"));
+      await import("./blockclaw-root.js"));
   });
 
   beforeEach(() => {

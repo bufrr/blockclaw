@@ -245,7 +245,7 @@ vi.mock("../gateway/session-utils.js", async (importOriginal) => {
     listAgentsForGateway: mocks.listAgentsForGateway,
   };
 });
-vi.mock("../infra/openclaw-root.js", () => ({
+vi.mock("../infra/blockclaw-root.js", () => ({
   resolveOpenClawPackageRoot: vi.fn().mockResolvedValue("/tmp/openclaw"),
 }));
 vi.mock("../infra/os-summary.js", () => ({

@@ -10,8 +10,8 @@ settings:
     SWIFT_VERSION: "6.0"
 
 packages:
-  OpenClawKit:
-    path: ../shared/OpenClawKit
+  BlockClawKit:
+    path: ../shared/BlockClawKit
   Swabble:
     path: ../../Swabble
 
@@ -38,11 +38,11 @@ targets:
       - target: OpenClawShareExtension
         embed: true
       - target: OpenClawWatchApp
-      - package: OpenClawKit
-      - package: OpenClawKit
-        product: OpenClawChatUI
-      - package: OpenClawKit
-        product: OpenClawProtocol
+      - package: BlockClawKit
+      - package: BlockClawKit
+        product: BlockClawChatUI
+      - package: BlockClawKit
+        product: BlockClawProtocol
       - package: Swabble
         product: SwabbleKit
       - sdk: AppIntents.framework
@@ -132,7 +132,7 @@ targets:
     sources:
       - path: ShareExtension
     dependencies:
-      - package: OpenClawKit
+      - package: BlockClawKit
       - sdk: AppIntents.framework
     settings:
       base:

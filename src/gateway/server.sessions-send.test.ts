@@ -12,7 +12,7 @@ import {
   testState,
 } from "./test-helpers.js";
 
-const { createOpenClawTools } = await import("../agents/openclaw-tools.js");
+const { createOpenClawTools } = await import("../agents/blockclaw-tools.js");
 
 installGatewayTestHooks({ scope: "suite" });
 

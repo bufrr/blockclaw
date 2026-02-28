@@ -14,10 +14,10 @@ import {
   type ExecToolDefaults,
   type ProcessToolDefaults,
 } from "./bash-tools.js";
+import { createOpenClawTools } from "./blockclaw-tools.js";
 import { listChannelAgentTools } from "./channel-tools.js";
 import { resolveImageSanitizationLimits } from "./image-sanitization.js";
 import type { ModelAuthMode } from "./model-auth.js";
-import { createOpenClawTools } from "./openclaw-tools.js";
 import { wrapToolWithAbortSignal } from "./pi-tools.abort.js";
 import { wrapToolWithBeforeToolCallHook } from "./pi-tools.before-tool-call.js";
 import {

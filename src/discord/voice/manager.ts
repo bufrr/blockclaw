@@ -23,7 +23,7 @@ import type { OpenClawConfig } from "../../config/config.js";
 import type { DiscordAccountConfig, TtsConfig } from "../../config/types.js";
 import { logVerbose, shouldLogVerbose } from "../../globals.js";
 import { formatErrorMessage } from "../../infra/errors.js";
-import { resolvePreferredOpenClawTmpDir } from "../../infra/tmp-openclaw-dir.js";
+import { resolvePreferredOpenClawTmpDir } from "../../infra/tmp-blockclaw-dir.js";
 import { createSubsystemLogger } from "../../logging/subsystem.js";
 import {
   buildProviderRegistry,

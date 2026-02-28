@@ -235,13 +235,13 @@ else
   echo "WARN: model catalog missing at $MODEL_CATALOG_SRC (continuing)" >&2
 fi
 
-echo "📦 Copying OpenClawKit resources"
-OPENCLAWKIT_BUNDLE="$(build_path_for_arch "$PRIMARY_ARCH")/$BUILD_CONFIG/OpenClawKit_OpenClawKit.bundle"
-if [ -d "$OPENCLAWKIT_BUNDLE" ]; then
-  rm -rf "$APP_ROOT/Contents/Resources/OpenClawKit_OpenClawKit.bundle"
-  cp -R "$OPENCLAWKIT_BUNDLE" "$APP_ROOT/Contents/Resources/OpenClawKit_OpenClawKit.bundle"
+echo "📦 Copying BlockClawKit resources"
+BLOCKCLAWKIT_BUNDLE="$(build_path_for_arch "$PRIMARY_ARCH")/$BUILD_CONFIG/BlockClawKit_BlockClawKit.bundle"
+if [ -d "$BLOCKCLAWKIT_BUNDLE" ]; then
+  rm -rf "$APP_ROOT/Contents/Resources/BlockClawKit_BlockClawKit.bundle"
+  cp -R "$BLOCKCLAWKIT_BUNDLE" "$APP_ROOT/Contents/Resources/BlockClawKit_BlockClawKit.bundle"
 else
-  echo "WARN: OpenClawKit resource bundle not found at $OPENCLAWKIT_BUNDLE (continuing)" >&2
+  echo "WARN: BlockClawKit resource bundle not found at $BLOCKCLAWKIT_BUNDLE (continuing)" >&2
 fi
 
 echo "📦 Copying Textual resources"
