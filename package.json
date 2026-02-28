@@ -1,5 +1,5 @@
 {
-  "name": "openclaw",
+  "name": "blockclaw",
   "version": "2026.2.27",
   "description": "Multi-channel AI gateway with extensible messaging integrations",
   "keywords": [],
@@ -14,7 +14,7 @@
     "url": "git+https://github.com/openclaw/openclaw.git"
   },
   "bin": {
-    "openclaw": "openclaw.mjs"
+    "blockclaw": "blockclaw.mjs"
   },
   "directories": {
     "doc": "docs",
@@ -23,7 +23,7 @@
   "files": [
     "CHANGELOG.md",
     "LICENSE",
-    "openclaw.mjs",
+    "blockclaw.mjs",
     "README-header.png",
     "README.md",
     "assets/",
@@ -44,7 +44,7 @@
       "types": "./dist/plugin-sdk/account-id.d.ts",
       "default": "./dist/plugin-sdk/account-id.js"
     },
-    "./cli-entry": "./openclaw.mjs"
+    "./cli-entry": "./blockclaw.mjs"
   },
   "scripts": {
     "android:assemble": "cd apps/android && ./gradlew :app:assembleDebug",
