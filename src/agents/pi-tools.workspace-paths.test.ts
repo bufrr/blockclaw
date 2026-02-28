@@ -23,8 +23,8 @@ async function withTempDir<T>(prefix: string, fn: (dir: string) => Promise<T>) {
 
 describe("workspace path resolution", () => {
   it("resolves relative read/write/edit paths against workspaceDir even after cwd changes", async () => {
-    await withTempDir("openclaw-ws-", async (workspaceDir) => {
-      await withTempDir("openclaw-cwd-", async (otherDir) => {
+    await withTempDir("blockclaw-ws-", async (workspaceDir) => {
+      await withTempDir("blockclaw-cwd-", async (otherDir) => {
         const cwdSpy = vi.spyOn(process, "cwd").mockReturnValue(otherDir);
         try {
           const tools = createOpenClawCodingTools({ workspaceDir });
@@ -49,10 +49,10 @@ describe("workspace path resolution", () => {
           await editTool.execute("ws-edit", {
             path: editFile,
             oldText: "world",
-            newText: "openclaw",
+            newText: "blockclaw",
           });
           expect(await fs.readFile(path.join(workspaceDir, editFile), "utf8")).toBe(
-            "hello openclaw",
+            "hello blockclaw",
           );
         } finally {
           cwdSpy.mockRestore();
@@ -62,8 +62,8 @@ describe("workspace path resolution", () => {
   });
 
   it("allows deletion edits with empty newText", async () => {
-    await withTempDir("openclaw-ws-", async (workspaceDir) => {
-      await withTempDir("openclaw-cwd-", async (otherDir) => {
+    await withTempDir("blockclaw-ws-", async (workspaceDir) => {
+      await withTempDir("blockclaw-cwd-", async (otherDir) => {
         const testFile = "delete.txt";
         await fs.writeFile(path.join(workspaceDir, testFile), "hello world", "utf8");
 
@@ -87,7 +87,7 @@ describe("workspace path resolution", () => {
   });
 
   it("defaults exec cwd to workspaceDir when workdir is omitted", async () => {
-    await withTempDir("openclaw-ws-", async (workspaceDir) => {
+    await withTempDir("blockclaw-ws-", async (workspaceDir) => {
       const tools = createOpenClawCodingTools({
         workspaceDir,
         exec: { host: "gateway", ask: "off", security: "full" },
@@ -112,8 +112,8 @@ describe("workspace path resolution", () => {
   });
 
   it("lets exec workdir override the workspace default", async () => {
-    await withTempDir("openclaw-ws-", async (workspaceDir) => {
-      await withTempDir("openclaw-override-", async (overrideDir) => {
+    await withTempDir("blockclaw-ws-", async (workspaceDir) => {
+      await withTempDir("blockclaw-override-", async (overrideDir) => {
         const tools = createOpenClawCodingTools({
           workspaceDir,
           exec: { host: "gateway", ask: "off", security: "full" },
@@ -140,12 +140,12 @@ describe("workspace path resolution", () => {
   });
 
   it("rejects @-prefixed absolute paths outside workspace when workspaceOnly is enabled", async () => {
-    await withTempDir("openclaw-ws-", async (workspaceDir) => {
+    await withTempDir("blockclaw-ws-", async (workspaceDir) => {
       const cfg: OpenClawConfig = { tools: { fs: { workspaceOnly: true } } };
       const tools = createOpenClawCodingTools({ workspaceDir, config: cfg });
       const { readTool } = expectReadWriteEditTools(tools);
 
-      const outsideAbsolute = path.resolve(path.parse(workspaceDir).root, "outside-openclaw.txt");
+      const outsideAbsolute = path.resolve(path.parse(workspaceDir).root, "outside-blockclaw.txt");
       await expect(
         readTool.execute("ws-read-at-prefix", { path: `@${outsideAbsolute}` }),
       ).rejects.toThrow(/Path escapes sandbox root/i);
@@ -156,7 +156,7 @@ describe("workspace path resolution", () => {
     if (process.platform === "win32") {
       return;
     }
-    await withTempDir("openclaw-ws-", async (workspaceDir) => {
+    await withTempDir("blockclaw-ws-", async (workspaceDir) => {
       const cfg: OpenClawConfig = { tools: { fs: { workspaceOnly: true } } };
       const tools = createOpenClawCodingTools({ workspaceDir, config: cfg });
       const { readTool, writeTool } = expectReadWriteEditTools(tools);
@@ -195,8 +195,8 @@ describe("workspace path resolution", () => {
 
 describe("sandboxed workspace paths", () => {
   it("uses sandbox workspace for relative read/write/edit", async () => {
-    await withTempDir("openclaw-sandbox-", async (sandboxDir) => {
-      await withTempDir("openclaw-workspace-", async (workspaceDir) => {
+    await withTempDir("blockclaw-sandbox-", async (sandboxDir) => {
+      await withTempDir("blockclaw-workspace-", async (workspaceDir) => {
         const sandbox = createPiToolsSandboxContext({
           workspaceDir: sandboxDir,
           agentWorkspaceDir: workspaceDir,

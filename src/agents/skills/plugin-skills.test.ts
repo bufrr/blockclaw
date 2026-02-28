@@ -30,7 +30,7 @@ function buildRegistry(params: { acpxRoot: string; helperRoot: string }): Plugin
         origin: "workspace",
         rootDir: params.acpxRoot,
         source: params.acpxRoot,
-        manifestPath: path.join(params.acpxRoot, "openclaw.plugin.json"),
+        manifestPath: path.join(params.acpxRoot, "blockclaw.plugin.json"),
       },
       {
         id: "helper",
@@ -41,7 +41,7 @@ function buildRegistry(params: { acpxRoot: string; helperRoot: string }): Plugin
         origin: "workspace",
         rootDir: params.helperRoot,
         source: params.helperRoot,
-        manifestPath: path.join(params.helperRoot, "openclaw.plugin.json"),
+        manifestPath: path.join(params.helperRoot, "blockclaw.plugin.json"),
       },
     ],
   };
@@ -54,9 +54,9 @@ afterEach(async () => {
 
 describe("resolvePluginSkillDirs", () => {
   it("keeps acpx plugin skills when ACP is enabled", async () => {
-    const workspaceDir = await tempDirs.make("openclaw-");
-    const acpxRoot = await tempDirs.make("openclaw-acpx-plugin-");
-    const helperRoot = await tempDirs.make("openclaw-helper-plugin-");
+    const workspaceDir = await tempDirs.make("blockclaw-");
+    const acpxRoot = await tempDirs.make("blockclaw-acpx-plugin-");
+    const helperRoot = await tempDirs.make("blockclaw-helper-plugin-");
     await fs.mkdir(path.join(acpxRoot, "skills"), { recursive: true });
     await fs.mkdir(path.join(helperRoot, "skills"), { recursive: true });
 
@@ -78,9 +78,9 @@ describe("resolvePluginSkillDirs", () => {
   });
 
   it("skips acpx plugin skills when ACP is disabled", async () => {
-    const workspaceDir = await tempDirs.make("openclaw-");
-    const acpxRoot = await tempDirs.make("openclaw-acpx-plugin-");
-    const helperRoot = await tempDirs.make("openclaw-helper-plugin-");
+    const workspaceDir = await tempDirs.make("blockclaw-");
+    const acpxRoot = await tempDirs.make("blockclaw-acpx-plugin-");
+    const helperRoot = await tempDirs.make("blockclaw-helper-plugin-");
     await fs.mkdir(path.join(acpxRoot, "skills"), { recursive: true });
     await fs.mkdir(path.join(helperRoot, "skills"), { recursive: true });
 

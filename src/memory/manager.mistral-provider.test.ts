@@ -63,7 +63,7 @@ describe("memory manager mistral provider wiring", () => {
 
   beforeEach(async () => {
     createEmbeddingProviderMock.mockReset();
-    workspaceDir = await fs.mkdtemp(path.join(os.tmpdir(), "openclaw-memory-mistral-"));
+    workspaceDir = await fs.mkdtemp(path.join(os.tmpdir(), "blockclaw-memory-mistral-"));
     indexPath = path.join(workspaceDir, "index.sqlite");
     await fs.mkdir(path.join(workspaceDir, "memory"), { recursive: true });
     await fs.writeFile(path.join(workspaceDir, "MEMORY.md"), "test");

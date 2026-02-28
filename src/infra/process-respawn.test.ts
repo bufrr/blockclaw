@@ -55,7 +55,7 @@ describe("restartGatewayProcessWithFreshPid", () => {
   });
 
   it("returns supervised when launchd/systemd hints are present", () => {
-    process.env.LAUNCH_JOB_LABEL = "ai.openclaw.gateway";
+    process.env.LAUNCH_JOB_LABEL = "ai.blockclaw.gateway";
     const result = restartGatewayProcessWithFreshPid();
     expect(result.mode).toBe("supervised");
     expect(spawnMock).not.toHaveBeenCalled();
@@ -63,8 +63,8 @@ describe("restartGatewayProcessWithFreshPid", () => {
 
   it("runs launchd kickstart helper on macOS when launchd label is set", () => {
     setPlatform("darwin");
-    process.env.LAUNCH_JOB_LABEL = "ai.openclaw.gateway";
-    process.env.OPENCLAW_LAUNCHD_LABEL = "ai.openclaw.gateway";
+    process.env.LAUNCH_JOB_LABEL = "ai.blockclaw.gateway";
+    process.env.OPENCLAW_LAUNCHD_LABEL = "ai.blockclaw.gateway";
     triggerOpenClawRestartMock.mockReturnValue({ ok: true, method: "launchctl" });
 
     const result = restartGatewayProcessWithFreshPid();
@@ -76,8 +76,8 @@ describe("restartGatewayProcessWithFreshPid", () => {
 
   it("returns failed when launchd kickstart helper fails", () => {
     setPlatform("darwin");
-    process.env.LAUNCH_JOB_LABEL = "ai.openclaw.gateway";
-    process.env.OPENCLAW_LAUNCHD_LABEL = "ai.openclaw.gateway";
+    process.env.LAUNCH_JOB_LABEL = "ai.blockclaw.gateway";
+    process.env.OPENCLAW_LAUNCHD_LABEL = "ai.blockclaw.gateway";
     triggerOpenClawRestartMock.mockReturnValue({
       ok: false,
       method: "launchctl",
@@ -93,7 +93,7 @@ describe("restartGatewayProcessWithFreshPid", () => {
   it("does not schedule kickstart on non-darwin platforms", () => {
     setPlatform("linux");
     process.env.INVOCATION_ID = "abc123";
-    process.env.OPENCLAW_LAUNCHD_LABEL = "ai.openclaw.gateway";
+    process.env.OPENCLAW_LAUNCHD_LABEL = "ai.blockclaw.gateway";
 
     const result = restartGatewayProcessWithFreshPid();
 
@@ -125,7 +125,7 @@ describe("restartGatewayProcessWithFreshPid", () => {
   it("returns supervised when OPENCLAW_LAUNCHD_LABEL is set (stock launchd plist)", () => {
     clearSupervisorHints();
     setPlatform("darwin");
-    process.env.OPENCLAW_LAUNCHD_LABEL = "ai.openclaw.gateway";
+    process.env.OPENCLAW_LAUNCHD_LABEL = "ai.blockclaw.gateway";
     triggerOpenClawRestartMock.mockReturnValue({ ok: true, method: "launchctl" });
     const result = restartGatewayProcessWithFreshPid();
     expect(result.mode).toBe("supervised");
@@ -135,7 +135,7 @@ describe("restartGatewayProcessWithFreshPid", () => {
 
   it("returns supervised when OPENCLAW_SYSTEMD_UNIT is set", () => {
     clearSupervisorHints();
-    process.env.OPENCLAW_SYSTEMD_UNIT = "openclaw-gateway.service";
+    process.env.OPENCLAW_SYSTEMD_UNIT = "blockclaw-gateway.service";
     const result = restartGatewayProcessWithFreshPid();
     expect(result.mode).toBe("supervised");
     expect(spawnMock).not.toHaveBeenCalled();

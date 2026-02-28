@@ -348,7 +348,7 @@ describe("web_search kimi provider", () => {
                       type: "function",
                       function: {
                         name: "$web_search",
-                        arguments: JSON.stringify({ q: "openclaw" }),
+                        arguments: JSON.stringify({ q: "blockclaw" }),
                       },
                     },
                   ],
@@ -356,7 +356,7 @@ describe("web_search kimi provider", () => {
               },
             ],
             search_results: [
-              { title: "OpenClaw", url: "https://openclaw.ai/docs", content: "docs" },
+              { title: "BlockClaw", url: "https://openclaw.ai/docs", content: "docs" },
             ],
           }),
           { status: 200, headers: { "content-type": "application/json" } },
@@ -378,7 +378,7 @@ describe("web_search kimi provider", () => {
       baseUrl: "https://api.moonshot.ai/v1",
       model: "moonshot-v1-128k",
     });
-    const result = await tool?.execute?.("call-1", { query: "latest openclaw release" });
+    const result = await tool?.execute?.("call-1", { query: "latest blockclaw release" });
 
     expect(mockFetch).toHaveBeenCalledTimes(2);
     const secondRequest = mockFetch.mock.calls[1]?.[1];

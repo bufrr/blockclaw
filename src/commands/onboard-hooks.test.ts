@@ -54,7 +54,7 @@ describe("onboard-hooks", () => {
     eligible: boolean,
   ) => ({
     ...params,
-    source: "openclaw-bundled" as const,
+    source: "blockclaw-bundled" as const,
     pluginId: undefined,
     homepage: undefined,
     always: false,
@@ -81,7 +81,7 @@ describe("onboard-hooks", () => {
 
   const createMockHookReport = (eligible = true): HookStatusReport => ({
     workspaceDir: "/mock/workspace",
-    managedHooksDir: "/mock/.openclaw/hooks",
+    managedHooksDir: "/mock/.blockclaw/hooks",
     hooks: [
       createMockHook(
         {

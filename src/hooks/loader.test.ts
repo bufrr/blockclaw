@@ -19,7 +19,7 @@ describe("loader", () => {
   let envSnapshot: ReturnType<typeof captureEnv>;
 
   beforeAll(async () => {
-    fixtureRoot = await fs.mkdtemp(path.join(os.tmpdir(), "openclaw-hooks-loader-"));
+    fixtureRoot = await fs.mkdtemp(path.join(os.tmpdir(), "blockclaw-hooks-loader-"));
   });
 
   beforeEach(async () => {
@@ -239,7 +239,7 @@ describe("loader", () => {
           "---",
           "name: symlink-hook",
           "description: symlink test",
-          'metadata: {"openclaw":{"events":["command:new"]}}',
+          'metadata: {"blockclaw":{"events":["command:new"]}}',
           "---",
           "",
           "# Symlink Hook",
@@ -297,7 +297,7 @@ describe("loader", () => {
           "---",
           "name: hardlink-hook",
           "description: hardlink test",
-          'metadata: {"openclaw":{"events":["command:new"]}}',
+          'metadata: {"blockclaw":{"events":["command:new"]}}',
           "---",
           "",
           "# Hardlink Hook",

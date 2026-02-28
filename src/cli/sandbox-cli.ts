@@ -14,30 +14,33 @@ type CommandOptions = Record<string, unknown>;
 
 const SANDBOX_EXAMPLES = {
   main: [
-    ["openclaw sandbox list", "List all sandbox containers."],
-    ["openclaw sandbox list --browser", "List only browser containers."],
-    ["openclaw sandbox recreate --all", "Recreate all containers."],
-    ["openclaw sandbox recreate --session main", "Recreate a specific session."],
-    ["openclaw sandbox recreate --agent mybot", "Recreate agent containers."],
-    ["openclaw sandbox explain", "Explain effective sandbox config."],
+    ["blockclaw sandbox list", "List all sandbox containers."],
+    ["blockclaw sandbox list --browser", "List only browser containers."],
+    ["blockclaw sandbox recreate --all", "Recreate all containers."],
+    ["blockclaw sandbox recreate --session main", "Recreate a specific session."],
+    ["blockclaw sandbox recreate --agent mybot", "Recreate agent containers."],
+    ["blockclaw sandbox explain", "Explain effective sandbox config."],
   ],
   list: [
-    ["openclaw sandbox list", "List all sandbox containers."],
-    ["openclaw sandbox list --browser", "List only browser containers."],
-    ["openclaw sandbox list --json", "JSON output."],
+    ["blockclaw sandbox list", "List all sandbox containers."],
+    ["blockclaw sandbox list --browser", "List only browser containers."],
+    ["blockclaw sandbox list --json", "JSON output."],
   ],
   recreate: [
-    ["openclaw sandbox recreate --all", "Recreate all containers."],
-    ["openclaw sandbox recreate --session main", "Recreate a specific session."],
-    ["openclaw sandbox recreate --agent mybot", "Recreate a specific agent (includes sub-agents)."],
-    ["openclaw sandbox recreate --browser --all", "Recreate only browser containers."],
-    ["openclaw sandbox recreate --all --force", "Skip confirmation."],
+    ["blockclaw sandbox recreate --all", "Recreate all containers."],
+    ["blockclaw sandbox recreate --session main", "Recreate a specific session."],
+    [
+      "blockclaw sandbox recreate --agent mybot",
+      "Recreate a specific agent (includes sub-agents).",
+    ],
+    ["blockclaw sandbox recreate --browser --all", "Recreate only browser containers."],
+    ["blockclaw sandbox recreate --all --force", "Skip confirmation."],
   ],
   explain: [
-    ["openclaw sandbox explain", "Show effective sandbox config."],
-    ["openclaw sandbox explain --session agent:main:main", "Explain a specific session."],
-    ["openclaw sandbox explain --agent work", "Explain an agent sandbox."],
-    ["openclaw sandbox explain --json", "JSON output."],
+    ["blockclaw sandbox explain", "Show effective sandbox config."],
+    ["blockclaw sandbox explain --session agent:main:main", "Explain a specific session."],
+    ["blockclaw sandbox explain --agent work", "Explain an agent sandbox."],
+    ["blockclaw sandbox explain --json", "JSON output."],
   ],
 } as const;
 

@@ -47,7 +47,7 @@ vi.mock("../../agents/agent-scope.js", () => ({
     return "main";
   },
   resolveDefaultAgentId: () => "main",
-  resolveAgentWorkspaceDir: () => "/tmp/openclaw-test-workspace",
+  resolveAgentWorkspaceDir: () => "/tmp/blockclaw-test-workspace",
 }));
 
 vi.mock("../../config/plugin-auto-enable.js", () => ({

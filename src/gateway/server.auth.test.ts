@@ -277,7 +277,7 @@ async function startRateLimitedTokenServerWithPairedDeviceToken() {
   const { server, ws, port, prevToken } = await startServerWithClient();
   const deviceIdentityPath = path.join(
     os.tmpdir(),
-    `openclaw-auth-rate-limit-${Date.now()}-${Math.random().toString(36).slice(2)}.json`,
+    `blockclaw-auth-rate-limit-${Date.now()}-${Math.random().toString(36).slice(2)}.json`,
   );
   try {
     const initial = await connectReq(ws, { token: "secret", deviceIdentityPath });
@@ -311,7 +311,7 @@ async function ensurePairedDeviceTokenForCurrentIdentity(ws: WebSocket): Promise
 
   const deviceIdentityPath = path.join(
     os.tmpdir(),
-    `openclaw-auth-device-${Date.now()}-${Math.random().toString(36).slice(2)}.json`,
+    `blockclaw-auth-device-${Date.now()}-${Math.random().toString(36).slice(2)}.json`,
   );
 
   const res = await connectReq(ws, { token: "secret", deviceIdentityPath });
@@ -500,7 +500,7 @@ describe("gateway server auth/connect", () => {
         scopes: [],
         clientId: GATEWAY_CLIENT_NAMES.TEST,
         clientMode: GATEWAY_CLIENT_MODES.TEST,
-        identityPath: path.join(os.tmpdir(), `openclaw-test-device-${randomUUID()}.json`),
+        identityPath: path.join(os.tmpdir(), `blockclaw-test-device-${randomUUID()}.json`),
         nonce,
       });
 
@@ -1059,7 +1059,7 @@ describe("gateway server auth/connect", () => {
           scopes,
           clientId: GATEWAY_CLIENT_NAMES.CONTROL_UI,
           clientMode: GATEWAY_CLIENT_MODES.WEBCHAT,
-          identityPath: path.join(os.tmpdir(), `openclaw-controlui-device-${randomUUID()}.json`),
+          identityPath: path.join(os.tmpdir(), `blockclaw-controlui-device-${randomUUID()}.json`),
           nonce: String(nonce),
         });
         const res = await connectReq(ws, {
@@ -1271,7 +1271,7 @@ describe("gateway server auth/connect", () => {
       await import("../infra/device-identity.js");
     const { getPairedDevice, listDevicePairing } = await import("../infra/device-pairing.js");
     const { server, ws, port, prevToken } = await startServerWithClient("secret");
-    const identityDir = await mkdtemp(join(tmpdir(), "openclaw-device-scope-"));
+    const identityDir = await mkdtemp(join(tmpdir(), "blockclaw-device-scope-"));
     const identity = loadOrCreateDeviceIdentity(join(identityDir, "device.json"));
     const client = {
       id: GATEWAY_CLIENT_NAMES.TEST,
@@ -1355,7 +1355,7 @@ describe("gateway server auth/connect", () => {
     const { approveDevicePairing, getPairedDevice, listDevicePairing, requestDevicePairing } =
       await import("../infra/device-pairing.js");
     const { server, ws, port, prevToken } = await startServerWithClient("secret");
-    const identityDir = await mkdtemp(join(tmpdir(), "openclaw-device-token-scope-"));
+    const identityDir = await mkdtemp(join(tmpdir(), "blockclaw-device-token-scope-"));
     const identity = loadOrCreateDeviceIdentity(join(identityDir, "device.json"));
     const devicePublicKey = publicKeyRawBase64UrlFromPem(identity.publicKeyPem);
     const buildDevice = (scopes: string[], nonce: string) => {
@@ -1421,7 +1421,7 @@ describe("gateway server auth/connect", () => {
       await import("../infra/device-pairing.js");
     const { server, ws, port, prevToken } = await startServerWithClient("secret");
     ws.close();
-    const identityDir = await mkdtemp(join(tmpdir(), "openclaw-device-scope-"));
+    const identityDir = await mkdtemp(join(tmpdir(), "blockclaw-device-scope-"));
     const identity = loadOrCreateDeviceIdentity(join(identityDir, "device.json"));
     const client = {
       id: GATEWAY_CLIENT_NAMES.TEST,
@@ -1518,7 +1518,7 @@ describe("gateway server auth/connect", () => {
       await import("../infra/device-identity.js");
     const { listDevicePairing } = await import("../infra/device-pairing.js");
     const { server, ws, port, prevToken } = await startServerWithClient("secret");
-    const identityDir = await mkdtemp(join(tmpdir(), "openclaw-device-scope-"));
+    const identityDir = await mkdtemp(join(tmpdir(), "blockclaw-device-scope-"));
     const identity = loadOrCreateDeviceIdentity(join(identityDir, "device.json"));
     const client = {
       id: GATEWAY_CLIENT_NAMES.TEST,
@@ -1589,7 +1589,7 @@ describe("gateway server auth/connect", () => {
     const { writeJsonAtomic } = await import("../infra/json-files.js");
     const { approveDevicePairing, getPairedDevice, listDevicePairing, requestDevicePairing } =
       await import("../infra/device-pairing.js");
-    const identityDir = await mkdtemp(join(tmpdir(), "openclaw-device-legacy-meta-"));
+    const identityDir = await mkdtemp(join(tmpdir(), "blockclaw-device-legacy-meta-"));
     const identity = loadOrCreateDeviceIdentity(join(identityDir, "device.json"));
     const deviceId = identity.deviceId;
     const publicKey = publicKeyRawBase64UrlFromPem(identity.publicKeyPem);
@@ -1677,7 +1677,7 @@ describe("gateway server auth/connect", () => {
       await import("../infra/device-pairing.js");
     const { GATEWAY_CLIENT_MODES, GATEWAY_CLIENT_NAMES } =
       await import("../utils/message-channel.js");
-    const identityDir = await mkdtemp(join(tmpdir(), "openclaw-device-legacy-"));
+    const identityDir = await mkdtemp(join(tmpdir(), "blockclaw-device-legacy-"));
     const identity = loadOrCreateDeviceIdentity(join(identityDir, "device.json"));
     const devicePublicKey = publicKeyRawBase64UrlFromPem(identity.publicKeyPem);
     const seeded = await requestDevicePairing({

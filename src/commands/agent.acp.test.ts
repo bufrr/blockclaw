@@ -23,7 +23,7 @@ const runtime: RuntimeEnv = {
 };
 
 async function withTempHome<T>(fn: (home: string) => Promise<T>): Promise<T> {
-  return withTempHomeBase(fn, { prefix: "openclaw-agent-acp-" });
+  return withTempHomeBase(fn, { prefix: "blockclaw-agent-acp-" });
 }
 
 function mockConfig(home: string, storePath: string) {
@@ -38,7 +38,7 @@ function mockConfig(home: string, storePath: string) {
       defaults: {
         model: { primary: "openai/gpt-5.3-codex" },
         models: { "openai/gpt-5.3-codex": {} },
-        workspace: path.join(home, "openclaw"),
+        workspace: path.join(home, "blockclaw"),
       },
     },
     session: { store: storePath, mainKey: "main" },
@@ -62,7 +62,7 @@ function mockConfigWithAcpOverrides(
       defaults: {
         model: { primary: "openai/gpt-5.3-codex" },
         models: { "openai/gpt-5.3-codex": {} },
-        workspace: path.join(home, "openclaw"),
+        workspace: path.join(home, "blockclaw"),
       },
     },
     session: { store: storePath, mainKey: "main" },

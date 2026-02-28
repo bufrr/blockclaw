@@ -29,7 +29,7 @@ let suiteRoot = "";
 let suiteCase = 0;
 
 beforeAll(async () => {
-  suiteRoot = await fs.mkdtemp(path.join(os.tmpdir(), "openclaw-session-suite-"));
+  suiteRoot = await fs.mkdtemp(path.join(os.tmpdir(), "blockclaw-session-suite-"));
 });
 
 afterAll(async () => {
@@ -54,7 +54,7 @@ const createStorePath = makeStorePath;
 describe("initSessionState thread forking", () => {
   it("forks a new session from the parent session file", async () => {
     const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
-    const root = await makeCaseDir("openclaw-thread-session-");
+    const root = await makeCaseDir("blockclaw-thread-session-");
     const sessionsDir = path.join(root, "sessions");
     await fs.mkdir(sessionsDir);
 
@@ -132,7 +132,7 @@ describe("initSessionState thread forking", () => {
 
   it("forks from parent when thread session key already exists but was not forked yet", async () => {
     const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
-    const root = await makeCaseDir("openclaw-thread-session-existing-");
+    const root = await makeCaseDir("blockclaw-thread-session-existing-");
     const sessionsDir = path.join(root, "sessions");
     await fs.mkdir(sessionsDir);
 
@@ -206,7 +206,7 @@ describe("initSessionState thread forking", () => {
   });
 
   it("skips fork and creates fresh session when parent tokens exceed threshold", async () => {
-    const root = await makeCaseDir("openclaw-thread-session-overflow-");
+    const root = await makeCaseDir("blockclaw-thread-session-overflow-");
     const sessionsDir = path.join(root, "sessions");
     await fs.mkdir(sessionsDir);
 
@@ -268,7 +268,7 @@ describe("initSessionState thread forking", () => {
   });
 
   it("respects session.parentForkMaxTokens override", async () => {
-    const root = await makeCaseDir("openclaw-thread-session-overflow-override-");
+    const root = await makeCaseDir("blockclaw-thread-session-overflow-override-");
     const sessionsDir = path.join(root, "sessions");
     await fs.mkdir(sessionsDir);
 
@@ -336,7 +336,7 @@ describe("initSessionState thread forking", () => {
   });
 
   it("records topic-specific session files when MessageThreadId is present", async () => {
-    const root = await makeCaseDir("openclaw-topic-session-");
+    const root = await makeCaseDir("blockclaw-topic-session-");
     const storePath = path.join(root, "sessions.json");
 
     const cfg = {
@@ -363,7 +363,7 @@ describe("initSessionState thread forking", () => {
 
 describe("initSessionState RawBody", () => {
   it("uses RawBody for command extraction and reset triggers when Body contains wrapped context", async () => {
-    const root = await makeCaseDir("openclaw-rawbody-");
+    const root = await makeCaseDir("blockclaw-rawbody-");
     const storePath = path.join(root, "sessions.json");
     const cfg = { session: { store: storePath } } as OpenClawConfig;
 
@@ -394,7 +394,7 @@ describe("initSessionState RawBody", () => {
   });
 
   it("preserves argument casing while still matching reset triggers case-insensitively", async () => {
-    const root = await makeCaseDir("openclaw-rawbody-reset-case-");
+    const root = await makeCaseDir("blockclaw-rawbody-reset-case-");
     const storePath = path.join(root, "sessions.json");
 
     const cfg = {
@@ -422,8 +422,8 @@ describe("initSessionState RawBody", () => {
   });
 
   it("uses the default per-agent sessions store when config store is unset", async () => {
-    const root = await makeCaseDir("openclaw-session-store-default-");
-    const stateDir = path.join(root, ".openclaw");
+    const root = await makeCaseDir("blockclaw-session-store-default-");
+    const stateDir = path.join(root, ".blockclaw");
     const agentId = "worker1";
     const sessionKey = `agent:${agentId}:telegram:12345`;
     const sessionId = "sess-worker-1";
@@ -474,7 +474,7 @@ describe("initSessionState reset policy", () => {
 
   it("defaults to daily reset at 4am local time", async () => {
     vi.setSystemTime(new Date(2026, 0, 18, 5, 0, 0));
-    const root = await makeCaseDir("openclaw-reset-daily-");
+    const root = await makeCaseDir("blockclaw-reset-daily-");
     const storePath = path.join(root, "sessions.json");
     const sessionKey = "agent:main:whatsapp:dm:s1";
     const existingSessionId = "daily-session-id";
@@ -499,7 +499,7 @@ describe("initSessionState reset policy", () => {
 
   it("treats sessions as stale before the daily reset when updated before yesterday's boundary", async () => {
     vi.setSystemTime(new Date(2026, 0, 18, 3, 0, 0));
-    const root = await makeCaseDir("openclaw-reset-daily-edge-");
+    const root = await makeCaseDir("blockclaw-reset-daily-edge-");
     const storePath = path.join(root, "sessions.json");
     const sessionKey = "agent:main:whatsapp:dm:s-edge";
     const existingSessionId = "daily-edge-session";
@@ -524,7 +524,7 @@ describe("initSessionState reset policy", () => {
 
   it("expires sessions when idle timeout wins over daily reset", async () => {
     vi.setSystemTime(new Date(2026, 0, 18, 5, 30, 0));
-    const root = await makeCaseDir("openclaw-reset-idle-");
+    const root = await makeCaseDir("blockclaw-reset-idle-");
     const storePath = path.join(root, "sessions.json");
     const sessionKey = "agent:main:whatsapp:dm:s2";
     const existingSessionId = "idle-session-id";
@@ -554,7 +554,7 @@ describe("initSessionState reset policy", () => {
 
   it("uses per-type overrides for thread sessions", async () => {
     vi.setSystemTime(new Date(2026, 0, 18, 5, 0, 0));
-    const root = await makeCaseDir("openclaw-reset-thread-");
+    const root = await makeCaseDir("blockclaw-reset-thread-");
     const storePath = path.join(root, "sessions.json");
     const sessionKey = "agent:main:slack:channel:c1:thread:123";
     const existingSessionId = "thread-session-id";
@@ -585,7 +585,7 @@ describe("initSessionState reset policy", () => {
 
   it("detects thread sessions without thread key suffix", async () => {
     vi.setSystemTime(new Date(2026, 0, 18, 5, 0, 0));
-    const root = await makeCaseDir("openclaw-reset-thread-nosuffix-");
+    const root = await makeCaseDir("blockclaw-reset-thread-nosuffix-");
     const storePath = path.join(root, "sessions.json");
     const sessionKey = "agent:main:discord:channel:c1";
     const existingSessionId = "thread-nosuffix";
@@ -615,7 +615,7 @@ describe("initSessionState reset policy", () => {
 
   it("defaults to daily resets when only resetByType is configured", async () => {
     vi.setSystemTime(new Date(2026, 0, 18, 5, 0, 0));
-    const root = await makeCaseDir("openclaw-reset-type-default-");
+    const root = await makeCaseDir("blockclaw-reset-type-default-");
     const storePath = path.join(root, "sessions.json");
     const sessionKey = "agent:main:whatsapp:dm:s4";
     const existingSessionId = "type-default-session";
@@ -645,7 +645,7 @@ describe("initSessionState reset policy", () => {
 
   it("keeps legacy idleMinutes behavior without reset config", async () => {
     vi.setSystemTime(new Date(2026, 0, 18, 5, 0, 0));
-    const root = await makeCaseDir("openclaw-reset-legacy-");
+    const root = await makeCaseDir("blockclaw-reset-legacy-");
     const storePath = path.join(root, "sessions.json");
     const sessionKey = "agent:main:whatsapp:dm:s3";
     const existingSessionId = "legacy-session-id";
@@ -676,7 +676,7 @@ describe("initSessionState reset policy", () => {
 
 describe("initSessionState channel reset overrides", () => {
   it("uses channel-specific reset policy when configured", async () => {
-    const root = await makeCaseDir("openclaw-channel-idle-");
+    const root = await makeCaseDir("blockclaw-channel-idle-");
     const storePath = path.join(root, "sessions.json");
     const sessionKey = "agent:main:discord:dm:123";
     const sessionId = "session-override";
@@ -742,7 +742,7 @@ describe("initSessionState reset triggers in WhatsApp groups", () => {
   it("applies WhatsApp group reset authorization across sender variants", async () => {
     const sessionKey = "agent:main:whatsapp:group:120363406150318674@g.us";
     const existingSessionId = "existing-session-123";
-    const storePath = await createStorePath("openclaw-group-reset");
+    const storePath = await createStorePath("blockclaw-group-reset");
     const cases = [
       {
         name: "authorized sender",
@@ -824,7 +824,7 @@ describe("initSessionState reset triggers in Slack channels", () => {
     const existingSessionId = "existing-session-123";
     const sessionKey = "agent:main:slack:channel:c2";
     const body = "<@U123> /new take notes";
-    const storePath = await createStorePath("openclaw-slack-channel-new-");
+    const storePath = await createStorePath("blockclaw-slack-channel-new-");
     await seedSessionStore({
       storePath,
       sessionKey,
@@ -971,7 +971,7 @@ describe("initSessionState preserves behavior overrides across /new and /reset",
   }
 
   it("preserves behavior overrides across /new and /reset", async () => {
-    const storePath = await createStorePath("openclaw-reset-overrides-");
+    const storePath = await createStorePath("blockclaw-reset-overrides-");
     const sessionKey = "agent:main:telegram:dm:user-overrides";
     const existingSessionId = "existing-session-overrides";
     const overrides = {
@@ -1027,7 +1027,7 @@ describe("initSessionState preserves behavior overrides across /new and /reset",
   });
 
   it("archives the old session store entry on /new", async () => {
-    const storePath = await createStorePath("openclaw-archive-old-");
+    const storePath = await createStorePath("blockclaw-archive-old-");
     const sessionKey = "agent:main:telegram:dm:user-archive";
     const existingSessionId = "existing-session-archive";
     await seedSessionStoreWithOverrides({
@@ -1072,7 +1072,7 @@ describe("initSessionState preserves behavior overrides across /new and /reset",
   });
 
   it("idle-based new session does NOT preserve overrides (no entry to read)", async () => {
-    const storePath = await createStorePath("openclaw-idle-no-preserve-");
+    const storePath = await createStorePath("blockclaw-idle-no-preserve-");
     const sessionKey = "agent:main:telegram:dm:new-user";
 
     const cfg = {
@@ -1144,7 +1144,7 @@ describe("persistSessionUsageUpdate", () => {
   }
 
   it("uses lastCallUsage for totalTokens when provided", async () => {
-    const storePath = await createStorePath("openclaw-usage-");
+    const storePath = await createStorePath("blockclaw-usage-");
     const sessionKey = "main";
     await seedSessionStore({
       storePath,
@@ -1171,7 +1171,7 @@ describe("persistSessionUsageUpdate", () => {
   });
 
   it("marks totalTokens as unknown when no fresh context snapshot is available", async () => {
-    const storePath = await createStorePath("openclaw-usage-");
+    const storePath = await createStorePath("blockclaw-usage-");
     const sessionKey = "main";
     await seedSessionStore({
       storePath,
@@ -1192,7 +1192,7 @@ describe("persistSessionUsageUpdate", () => {
   });
 
   it("uses promptTokens when available without lastCallUsage", async () => {
-    const storePath = await createStorePath("openclaw-usage-");
+    const storePath = await createStorePath("blockclaw-usage-");
     const sessionKey = "main";
     await seedSessionStore({
       storePath,
@@ -1214,7 +1214,7 @@ describe("persistSessionUsageUpdate", () => {
   });
 
   it("persists totalTokens from promptTokens when usage is unavailable", async () => {
-    const storePath = await createStorePath("openclaw-usage-");
+    const storePath = await createStorePath("blockclaw-usage-");
     const sessionKey = "main";
     await seedSessionStore({
       storePath,
@@ -1243,7 +1243,7 @@ describe("persistSessionUsageUpdate", () => {
   });
 
   it("keeps non-clamped lastCallUsage totalTokens when exceeding context window", async () => {
-    const storePath = await createStorePath("openclaw-usage-");
+    const storePath = await createStorePath("blockclaw-usage-");
     const sessionKey = "main";
     await seedSessionStore({
       storePath,

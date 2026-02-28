@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { OpenClawSchema } from "./zod-schema.js";
 
-describe("OpenClawSchema cron retention and run-log validation", () => {
+describe("BlockClawSchema cron retention and run-log validation", () => {
   it("accepts valid cron.sessionRetention and runLog values", () => {
     expect(() =>
       OpenClawSchema.parse({

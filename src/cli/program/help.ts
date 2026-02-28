@@ -26,7 +26,7 @@ const EXAMPLES = [
     "Link personal WhatsApp Web and show QR + connection logs.",
   ],
   [
-    'openclaw message send --target +15555550123 --message "Hi" --json',
+    'blockclaw message send --target +15555550123 --message "Hi" --json',
     "Send via your web session and print JSON result.",
   ],
   ["blockclaw gateway --port 18789", "Run the WebSocket Gateway locally."],
@@ -34,11 +34,11 @@ const EXAMPLES = [
   ["blockclaw gateway --force", "Kill anything bound to the default gateway port, then start it."],
   ["blockclaw gateway ...", "Gateway control via WebSocket."],
   [
-    'openclaw agent --to +15555550123 --message "Run summary" --deliver',
+    'blockclaw agent --to +15555550123 --message "Run summary" --deliver',
     "Talk directly to the agent using the Gateway; optionally send the WhatsApp reply.",
   ],
   [
-    'openclaw message send --channel telegram --target @mychat --message "Hi"',
+    'blockclaw message send --channel telegram --target @mychat --message "Hi"',
     "Send via your Telegram bot.",
   ],
 ] as const;

@@ -22,7 +22,7 @@ function makeSnapshot<TConfig extends Record<string, unknown>>(
   raw?: string,
 ): TestSnapshot<TConfig> {
   return {
-    path: "/home/user/.openclaw/config.json5",
+    path: "/home/user/.blockclaw/config.json5",
     exists: true,
     raw: raw ?? JSON.stringify(config),
     parsed: config,
@@ -219,9 +219,9 @@ describe("redactConfigSnapshot", () => {
     const snapshot = makeSnapshot({
       channels: {
         irc: {
-          passwordFile: "/etc/openclaw/irc-password.txt",
+          passwordFile: "/etc/blockclaw/irc-password.txt",
           nickserv: {
-            passwordFile: "/etc/openclaw/nickserv-password.txt",
+            passwordFile: "/etc/blockclaw/nickserv-password.txt",
             password: "super-secret-nickserv-password",
           },
         },
@@ -233,8 +233,8 @@ describe("redactConfigSnapshot", () => {
     const irc = channels.irc;
     const nickserv = irc.nickserv as Record<string, unknown>;
 
-    expect(irc.passwordFile).toBe("/etc/openclaw/irc-password.txt");
-    expect(nickserv.passwordFile).toBe("/etc/openclaw/nickserv-password.txt");
+    expect(irc.passwordFile).toBe("/etc/blockclaw/irc-password.txt");
+    expect(nickserv.passwordFile).toBe("/etc/blockclaw/nickserv-password.txt");
     expect(nickserv.password).toBe(REDACTED_SENTINEL);
   });
 
@@ -1034,7 +1034,7 @@ describe("realredactConfigSnapshot_real", () => {
       target: "draft-07",
       unrepresentable: "any",
     });
-    schema.title = "OpenClawConfig";
+    schema.title = "BlockClawConfig";
     const hints = mapSensitivePaths(OpenClawSchema, "", {});
 
     const snapshot = makeSnapshot({

@@ -25,7 +25,7 @@ vi.mock("../banner.js", () => ({
 }));
 
 vi.mock("../cli-name.js", () => ({
-  resolveCliName: () => "openclaw",
+  resolveCliName: () => "blockclaw",
 }));
 
 vi.mock("./config-guard.js", () => ({
@@ -73,7 +73,7 @@ afterEach(() => {
 
 describe("registerPreActionHooks", () => {
   function buildProgram() {
-    const program = new Command().name("openclaw");
+    const program = new Command().name("blockclaw");
     program.command("status").action(async () => {});
     program.command("doctor").action(async () => {});
     program.command("completion").action(async () => {});
@@ -101,7 +101,7 @@ describe("registerPreActionHooks", () => {
   it("emits banner, resolves config, and enables verbose from --debug", async () => {
     await runCommand({
       parseArgv: ["status"],
-      processArgv: ["node", "openclaw", "status", "--debug"],
+      processArgv: ["node", "blockclaw", "status", "--debug"],
     });
 
     expect(emitCliBannerMock).toHaveBeenCalledWith("9.9.9-test");
@@ -111,13 +111,13 @@ describe("registerPreActionHooks", () => {
       commandPath: ["status"],
     });
     expect(ensurePluginRegistryLoadedMock).not.toHaveBeenCalled();
-    expect(process.title).toBe("openclaw-status");
+    expect(process.title).toBe("blockclaw-status");
   });
 
   it("loads plugin registry for plugin-required commands", async () => {
     await runCommand({
       parseArgv: ["message", "send"],
-      processArgv: ["node", "openclaw", "message", "send"],
+      processArgv: ["node", "blockclaw", "message", "send"],
     });
 
     expect(setVerboseMock).toHaveBeenCalledWith(false);
@@ -132,7 +132,7 @@ describe("registerPreActionHooks", () => {
   it("loads plugin registry for configure command", async () => {
     await runCommand({
       parseArgv: ["configure"],
-      processArgv: ["node", "openclaw", "configure"],
+      processArgv: ["node", "blockclaw", "configure"],
     });
 
     expect(ensurePluginRegistryLoadedMock).toHaveBeenCalledTimes(1);
@@ -141,7 +141,7 @@ describe("registerPreActionHooks", () => {
   it("loads plugin registry for onboard command", async () => {
     await runCommand({
       parseArgv: ["onboard"],
-      processArgv: ["node", "openclaw", "onboard"],
+      processArgv: ["node", "blockclaw", "onboard"],
     });
 
     expect(ensurePluginRegistryLoadedMock).toHaveBeenCalledTimes(1);
@@ -150,7 +150,7 @@ describe("registerPreActionHooks", () => {
   it("loads plugin registry for agents command", async () => {
     await runCommand({
       parseArgv: ["agents"],
-      processArgv: ["node", "openclaw", "agents"],
+      processArgv: ["node", "blockclaw", "agents"],
     });
 
     expect(ensurePluginRegistryLoadedMock).toHaveBeenCalledTimes(1);
@@ -159,15 +159,15 @@ describe("registerPreActionHooks", () => {
   it("skips config guard for doctor, completion, and secrets commands", async () => {
     await runCommand({
       parseArgv: ["doctor"],
-      processArgv: ["node", "openclaw", "doctor"],
+      processArgv: ["node", "blockclaw", "doctor"],
     });
     await runCommand({
       parseArgv: ["completion"],
-      processArgv: ["node", "openclaw", "completion"],
+      processArgv: ["node", "blockclaw", "completion"],
     });
     await runCommand({
       parseArgv: ["secrets"],
-      processArgv: ["node", "openclaw", "secrets"],
+      processArgv: ["node", "blockclaw", "secrets"],
     });
 
     expect(ensureConfigReadyMock).not.toHaveBeenCalled();
@@ -176,7 +176,7 @@ describe("registerPreActionHooks", () => {
   it("skips preaction work when argv indicates help/version", async () => {
     await runCommand({
       parseArgv: ["status"],
-      processArgv: ["node", "openclaw", "--version"],
+      processArgv: ["node", "blockclaw", "--version"],
     });
 
     expect(emitCliBannerMock).not.toHaveBeenCalled();
@@ -188,7 +188,7 @@ describe("registerPreActionHooks", () => {
     process.env.OPENCLAW_HIDE_BANNER = "1";
     await runCommand({
       parseArgv: ["status"],
-      processArgv: ["node", "openclaw", "status"],
+      processArgv: ["node", "blockclaw", "status"],
     });
 
     expect(emitCliBannerMock).not.toHaveBeenCalled();

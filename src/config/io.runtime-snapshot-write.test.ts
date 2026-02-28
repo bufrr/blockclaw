@@ -13,8 +13,8 @@ import type { OpenClawConfig } from "./types.js";
 
 describe("runtime config snapshot writes", () => {
   it("preserves source secret refs when writeConfigFile receives runtime-resolved config", async () => {
-    await withTempHome("openclaw-config-runtime-write-", async (home) => {
-      const configPath = path.join(home, ".openclaw", "openclaw.json");
+    await withTempHome("blockclaw-config-runtime-write-", async (home) => {
+      const configPath = path.join(home, ".blockclaw", "blockclaw.json");
       const sourceConfig: OpenClawConfig = {
         models: {
           providers: {

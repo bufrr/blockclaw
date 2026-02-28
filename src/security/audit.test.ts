@@ -154,7 +154,7 @@ describe("security audit", () => {
   };
 
   beforeAll(async () => {
-    fixtureRoot = await fs.mkdtemp(path.join(os.tmpdir(), "openclaw-security-audit-"));
+    fixtureRoot = await fs.mkdtemp(path.join(os.tmpdir(), "blockclaw-security-audit-"));
     channelSecurityStateDir = path.join(fixtureRoot, "channel-security");
     await fs.mkdir(path.join(channelSecurityStateDir, "credentials"), {
       recursive: true,
@@ -442,7 +442,7 @@ describe("security audit", () => {
     const riskyGlobalTrustedDirs =
       process.platform === "win32"
         ? [String.raw`C:\Users\ci-user\bin`, String.raw`C:\Users\ci-user\.local\bin`]
-        : ["/usr/local/bin", "/tmp/openclaw-safe-bins"];
+        : ["/usr/local/bin", "/tmp/blockclaw-safe-bins"];
     const cfg: OpenClawConfig = {
       tools: {
         exec: {
@@ -542,7 +542,7 @@ describe("security audit", () => {
     const tmp = await makeTmpDir("win");
     const stateDir = path.join(tmp, "state");
     await fs.mkdir(stateDir, { recursive: true });
-    const configPath = path.join(stateDir, "openclaw.json");
+    const configPath = path.join(stateDir, "blockclaw.json");
     await fs.writeFile(configPath, "{}\n", "utf-8");
 
     const user = "DESKTOP-TEST\\Tester";
@@ -579,7 +579,7 @@ describe("security audit", () => {
     const tmp = await makeTmpDir("win-open");
     const stateDir = path.join(tmp, "state");
     await fs.mkdir(stateDir, { recursive: true });
-    const configPath = path.join(stateDir, "openclaw.json");
+    const configPath = path.join(stateDir, "blockclaw.json");
     await fs.writeFile(configPath, "{}\n", "utf-8");
 
     const user = "DESKTOP-TEST\\Tester";
@@ -619,26 +619,26 @@ describe("security audit", () => {
     const tmp = await makeTmpDir("browser-hash-labels");
     const stateDir = path.join(tmp, "state");
     await fs.mkdir(stateDir, { recursive: true, mode: 0o700 });
-    const configPath = path.join(stateDir, "openclaw.json");
+    const configPath = path.join(stateDir, "blockclaw.json");
     await fs.writeFile(configPath, "{}\n", "utf-8");
     await fs.chmod(configPath, 0o600);
 
     const execDockerRawFn = (async (args: string[]) => {
       if (args[0] === "ps") {
         return {
-          stdout: Buffer.from("openclaw-sbx-browser-old\nopenclaw-sbx-browser-missing-hash\n"),
+          stdout: Buffer.from("blockclaw-sbx-browser-old\nblockclaw-sbx-browser-missing-hash\n"),
           stderr: Buffer.alloc(0),
           code: 0,
         };
       }
-      if (args[0] === "inspect" && args.at(-1) === "openclaw-sbx-browser-old") {
+      if (args[0] === "inspect" && args.at(-1) === "blockclaw-sbx-browser-old") {
         return {
           stdout: Buffer.from("abc123\tepoch-v0\n"),
           stderr: Buffer.alloc(0),
           code: 0,
         };
       }
-      if (args[0] === "inspect" && args.at(-1) === "openclaw-sbx-browser-missing-hash") {
+      if (args[0] === "inspect" && args.at(-1) === "blockclaw-sbx-browser-missing-hash") {
         return {
           stdout: Buffer.from("<no value>\t<no value>\n"),
           stderr: Buffer.alloc(0),
@@ -666,14 +666,14 @@ describe("security audit", () => {
     const staleEpoch = res.findings.find(
       (f) => f.checkId === "sandbox.browser_container.hash_epoch_stale",
     );
-    expect(staleEpoch?.detail).toContain("openclaw-sbx-browser-old");
+    expect(staleEpoch?.detail).toContain("blockclaw-sbx-browser-old");
   });
 
   it("skips sandbox browser hash label checks when docker inspect is unavailable", async () => {
     const tmp = await makeTmpDir("browser-hash-labels-skip");
     const stateDir = path.join(tmp, "state");
     await fs.mkdir(stateDir, { recursive: true, mode: 0o700 });
-    const configPath = path.join(stateDir, "openclaw.json");
+    const configPath = path.join(stateDir, "blockclaw.json");
     await fs.writeFile(configPath, "{}\n", "utf-8");
     await fs.chmod(configPath, 0o600);
 
@@ -698,26 +698,26 @@ describe("security audit", () => {
     const tmp = await makeTmpDir("browser-non-loopback-publish");
     const stateDir = path.join(tmp, "state");
     await fs.mkdir(stateDir, { recursive: true, mode: 0o700 });
-    const configPath = path.join(stateDir, "openclaw.json");
+    const configPath = path.join(stateDir, "blockclaw.json");
     await fs.writeFile(configPath, "{}\n", "utf-8");
     await fs.chmod(configPath, 0o600);
 
     const execDockerRawFn = (async (args: string[]) => {
       if (args[0] === "ps") {
         return {
-          stdout: Buffer.from("openclaw-sbx-browser-exposed\n"),
+          stdout: Buffer.from("blockclaw-sbx-browser-exposed\n"),
           stderr: Buffer.alloc(0),
           code: 0,
         };
       }
-      if (args[0] === "inspect" && args.at(-1) === "openclaw-sbx-browser-exposed") {
+      if (args[0] === "inspect" && args.at(-1) === "blockclaw-sbx-browser-exposed") {
         return {
           stdout: Buffer.from("hash123\t2026-02-21-novnc-auth-default\n"),
           stderr: Buffer.alloc(0),
           code: 0,
         };
       }
-      if (args[0] === "port" && args.at(-1) === "openclaw-sbx-browser-exposed") {
+      if (args[0] === "port" && args.at(-1) === "blockclaw-sbx-browser-exposed") {
         return {
           stdout: Buffer.from("6080/tcp -> 0.0.0.0:49101\n9222/tcp -> 127.0.0.1:49100\n"),
           stderr: Buffer.alloc(0),
@@ -754,11 +754,11 @@ describe("security audit", () => {
     const stateDir = path.join(tmp, "state");
     await fs.mkdir(stateDir, { recursive: true, mode: 0o700 });
 
-    const targetConfigPath = path.join(tmp, "managed-openclaw.json");
+    const targetConfigPath = path.join(tmp, "managed-blockclaw.json");
     await fs.writeFile(targetConfigPath, "{}\n", "utf-8");
     await fs.chmod(targetConfigPath, 0o444);
 
-    const configPath = path.join(stateDir, "openclaw.json");
+    const configPath = path.join(stateDir, "blockclaw.json");
     await fs.symlink(targetConfigPath, configPath);
 
     const res = await runSecurityAudit({
@@ -1633,7 +1633,7 @@ describe("security audit", () => {
         "channels.discord.guilds.123.channels.general.users:security-team",
       );
       expect(finding?.detail).toContain(
-        "~/.openclaw/credentials/discord-allowFrom.json:team.owner",
+        "~/.blockclaw/credentials/discord-allowFrom.json:team.owner",
       );
       expect(finding?.detail).not.toContain("<@123456789012345678>");
     });
@@ -2205,8 +2205,8 @@ describe("security audit", () => {
     const cfg: OpenClawConfig = {};
 
     const res = await audit(cfg, {
-      stateDir: "/Users/test/Dropbox/.openclaw",
-      configPath: "/Users/test/Dropbox/.openclaw/openclaw.json",
+      stateDir: "/Users/test/Dropbox/.blockclaw",
+      configPath: "/Users/test/Dropbox/.blockclaw/blockclaw.json",
     });
 
     expectFinding(res, "fs.synced_dir", "warn");
@@ -2227,7 +2227,7 @@ describe("security audit", () => {
       await fs.chmod(includePath, 0o644);
     }
 
-    const configPath = path.join(stateDir, "openclaw.json");
+    const configPath = path.join(stateDir, "blockclaw.json");
     await fs.writeFile(configPath, `{ "$include": "./extra.json5" }\n`, "utf-8");
     await fs.chmod(configPath, 0o600);
 
@@ -2300,7 +2300,7 @@ describe("security audit", () => {
         includeFilesystem: true,
         includeChannelSecurity: false,
         stateDir,
-        configPath: path.join(stateDir, "openclaw.json"),
+        configPath: path.join(stateDir, "blockclaw.json"),
       });
 
       expect(res.findings).toEqual(
@@ -2363,7 +2363,7 @@ describe("security audit", () => {
       includeFilesystem: true,
       includeChannelSecurity: false,
       stateDir,
-      configPath: path.join(stateDir, "openclaw.json"),
+      configPath: path.join(stateDir, "blockclaw.json"),
     });
 
     expect(hasFinding(res, "plugins.installs_unpinned_npm_specs", "warn")).toBe(true);
@@ -2405,7 +2405,7 @@ describe("security audit", () => {
       includeFilesystem: true,
       includeChannelSecurity: false,
       stateDir,
-      configPath: path.join(stateDir, "openclaw.json"),
+      configPath: path.join(stateDir, "blockclaw.json"),
     });
 
     expect(hasFinding(res, "plugins.installs_unpinned_npm_specs")).toBe(false);
@@ -2462,7 +2462,7 @@ describe("security audit", () => {
       includeFilesystem: true,
       includeChannelSecurity: false,
       stateDir,
-      configPath: path.join(stateDir, "openclaw.json"),
+      configPath: path.join(stateDir, "blockclaw.json"),
     });
 
     expect(hasFinding(res, "plugins.installs_version_drift", "warn")).toBe(true);
@@ -2485,7 +2485,7 @@ describe("security audit", () => {
       includeFilesystem: true,
       includeChannelSecurity: false,
       stateDir,
-      configPath: path.join(stateDir, "openclaw.json"),
+      configPath: path.join(stateDir, "blockclaw.json"),
     });
 
     expect(res.findings).toEqual(
@@ -2515,7 +2515,7 @@ describe("security audit", () => {
       includeFilesystem: true,
       includeChannelSecurity: false,
       stateDir,
-      configPath: path.join(stateDir, "openclaw.json"),
+      configPath: path.join(stateDir, "blockclaw.json"),
     });
 
     expect(
@@ -2544,7 +2544,7 @@ describe("security audit", () => {
         includeFilesystem: true,
         includeChannelSecurity: false,
         stateDir,
-        configPath: path.join(stateDir, "openclaw.json"),
+        configPath: path.join(stateDir, "blockclaw.json"),
       });
 
       expect(res.findings).toEqual(

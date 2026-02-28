@@ -41,7 +41,7 @@ name: session-memory
 description: "Save session context"
 metadata:
   {
-    "openclaw": {
+    "blockclaw": {
       "emoji": "💾",
       "events": ["command:new"]
     }
@@ -68,7 +68,7 @@ name: command-logger
 description: "Log all command events"
 metadata:
   {
-    "openclaw":
+    "blockclaw":
       {
         "emoji": "📝",
         "events": ["command"],
@@ -92,12 +92,12 @@ metadata:
   it("handles single-line metadata (inline JSON)", () => {
     const content = `---
 name: simple-hook
-metadata: {"openclaw": {"events": ["test"]}}
+metadata: {"blockclaw": {"events": ["test"]}}
 ---
 `;
     const result = parseFrontmatter(content);
     expect(result.name).toBe("simple-hook");
-    expect(result.metadata).toBe('{"openclaw": {"events": ["test"]}}');
+    expect(result.metadata).toBe('{"blockclaw": {"events": ["test"]}}');
   });
 
   it("handles mixed single-line and multi-line values", () => {
@@ -107,7 +107,7 @@ description: "A hook with mixed values"
 homepage: https://example.com
 metadata:
   {
-    "openclaw": {
+    "blockclaw": {
       "events": ["command:new"]
     }
   }
@@ -148,8 +148,8 @@ description: 'single-quoted'
   });
 });
 
-describe("resolveOpenClawMetadata", () => {
-  it("extracts openclaw metadata from parsed frontmatter", () => {
+describe("resolveBlockClawMetadata", () => {
+  it("extracts blockclaw metadata from parsed frontmatter", () => {
     const frontmatter = {
       name: "test-hook",
       metadata: JSON.stringify({
@@ -178,7 +178,7 @@ describe("resolveOpenClawMetadata", () => {
     expect(result).toBeUndefined();
   });
 
-  it("returns undefined when openclaw key is missing", () => {
+  it("returns undefined when blockclaw key is missing", () => {
     const frontmatter = {
       metadata: JSON.stringify({ other: "data" }),
     };
@@ -200,7 +200,7 @@ describe("resolveOpenClawMetadata", () => {
         openclaw: {
           events: ["command"],
           install: [
-            { id: "bundled", kind: "bundled", label: "Bundled with OpenClaw" },
+            { id: "bundled", kind: "bundled", label: "Bundled with BlockClaw" },
             { id: "npm", kind: "npm", package: "@openclaw/hook" },
           ],
         },
@@ -236,12 +236,12 @@ description: "Save session context to memory when /new or /reset command is issu
 homepage: https://docs.openclaw.ai/automation/hooks#session-memory
 metadata:
   {
-    "openclaw":
+    "blockclaw":
       {
         "emoji": "💾",
         "events": ["command:new", "command:reset"],
         "requires": { "config": ["workspace.dir"] },
-        "install": [{ "id": "bundled", "kind": "bundled", "label": "Bundled with OpenClaw" }],
+        "install": [{ "id": "bundled", "kind": "bundled", "label": "Bundled with BlockClaw" }],
       },
   }
 ---
@@ -265,7 +265,7 @@ metadata:
     const content = `---
 name: yaml-metadata
 metadata:
-  openclaw:
+  blockclaw:
     emoji: disk
     events:
       - command:new

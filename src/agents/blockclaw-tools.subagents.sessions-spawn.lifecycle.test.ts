@@ -102,7 +102,7 @@ async function emitLifecycleEndAndFlush(params: {
   }
 }
 
-describe("openclaw-tools: subagents (sessions_spawn lifecycle)", () => {
+describe("blockclaw-tools: subagents (sessions_spawn lifecycle)", () => {
   beforeEach(() => {
     resetSessionsSpawnConfigOverride();
     setSessionsSpawnConfigOverride({

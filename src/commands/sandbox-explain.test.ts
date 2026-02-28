@@ -26,7 +26,7 @@ describe("sandbox explain command", () => {
         sandbox: { tools: { deny: ["browser"] } },
         elevated: { enabled: true, allowFrom: { whatsapp: ["*"] } },
       },
-      session: { store: "/tmp/openclaw-test-sessions-{agentId}.json" },
+      session: { store: "/tmp/blockclaw-test-sessions-{agentId}.json" },
     };
 
     const logs: string[] = [];

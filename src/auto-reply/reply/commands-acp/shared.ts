@@ -417,9 +417,9 @@ export function resolveAcpInstallCommandHint(cfg: OpenClawConfig): string {
   if (backendId === "acpx") {
     const localPath = path.resolve(process.cwd(), "extensions/acpx");
     if (existsSync(localPath)) {
-      return `openclaw plugins install ${localPath}`;
+      return `blockclaw plugins install ${localPath}`;
     }
-    return "openclaw plugins install @openclaw/acpx";
+    return "blockclaw plugins install @openclaw/acpx";
   }
   return `Install and enable the plugin that provides ACP backend "${backendId}".`;
 }

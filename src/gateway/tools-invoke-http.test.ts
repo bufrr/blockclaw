@@ -389,8 +389,8 @@ describe("POST /tools/invoke", () => {
       port: sharedPort,
       headers: {
         ...gatewayAuthHeaders(),
-        "x-openclaw-message-to": "channel:24514",
-        "x-openclaw-thread-id": "thread-24514",
+        "x-blockclaw-message-to": "channel:24514",
+        "x-blockclaw-thread-id": "thread-24514",
       },
       tool: "sessions_spawn",
       sessionKey: "main",

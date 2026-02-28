@@ -25,7 +25,7 @@ let installPluginFromNpmSpec: typeof import("./install.js").installPluginFromNpm
 let runCommandWithTimeout: typeof import("../process/exec.js").runCommandWithTimeout;
 
 function makeTempDir() {
-  const dir = path.join(os.tmpdir(), `openclaw-plugin-install-${randomUUID()}`);
+  const dir = path.join(os.tmpdir(), `blockclaw-plugin-install-${randomUUID()}`);
   fs.mkdirSync(dir, { recursive: true });
   tempDirs.push(dir);
   return dir;
@@ -271,7 +271,7 @@ beforeEach(() => {
 });
 
 describe("installPluginFromArchive", () => {
-  it("installs into ~/.openclaw/extensions and uses unscoped id", async () => {
+  it("installs into ~/.blockclaw/extensions and uses unscoped id", async () => {
     const { stateDir, archivePath, extensionsDir } = await setupVoiceCallArchiveInstall({
       outName: "plugin.tgz",
       version: "0.0.1",
@@ -380,7 +380,7 @@ describe("installPluginFromArchive", () => {
     });
   });
 
-  it("rejects packages without openclaw.extensions", async () => {
+  it("rejects packages without blockclaw.extensions", async () => {
     const result = await installArchivePackageAndReturnResult({
       packageJson: { name: "@openclaw/nope", version: "0.0.1" },
       outName: "bad.tgz",
@@ -389,7 +389,7 @@ describe("installPluginFromArchive", () => {
     if (result.ok) {
       return;
     }
-    expect(result.error).toContain("openclaw.extensions");
+    expect(result.error).toContain("blockclaw.extensions");
   });
 
   it("warns when plugin contains dangerous code patterns", async () => {
@@ -514,7 +514,7 @@ describe("installPluginFromDir", () => {
     expect(manifest.devDependencies?.vitest).toBe("^3.0.0");
   });
 
-  it("uses openclaw.plugin.json id as install key when it differs from package name", async () => {
+  it("uses blockclaw.plugin.json id as install key when it differs from package name", async () => {
     const { pluginDir, extensionsDir } = setupPluginInstallDirs();
     fs.mkdirSync(path.join(pluginDir, "dist"), { recursive: true });
     fs.writeFileSync(
@@ -528,7 +528,7 @@ describe("installPluginFromDir", () => {
     );
     fs.writeFileSync(path.join(pluginDir, "dist", "index.js"), "export {};", "utf-8");
     fs.writeFileSync(
-      path.join(pluginDir, "openclaw.plugin.json"),
+      path.join(pluginDir, "blockclaw.plugin.json"),
       JSON.stringify({
         id: "memory-cognee",
         configSchema: { type: "object", properties: {} },
@@ -552,7 +552,7 @@ describe("installPluginFromDir", () => {
     expect(
       infoMessages.some((msg) =>
         msg.includes(
-          'Plugin manifest id "memory-cognee" differs from npm package name "cognee-openclaw"',
+          'Plugin manifest id "memory-cognee" differs from npm package name "cognee-blockclaw"',
         ),
       ),
     ).toBe(true);
@@ -572,7 +572,7 @@ describe("installPluginFromDir", () => {
     );
     fs.writeFileSync(path.join(pluginDir, "dist", "index.js"), "export {};", "utf-8");
     fs.writeFileSync(
-      path.join(pluginDir, "openclaw.plugin.json"),
+      path.join(pluginDir, "blockclaw.plugin.json"),
       JSON.stringify({
         id: "@team/memory-cognee",
         configSchema: { type: "object", properties: {} },

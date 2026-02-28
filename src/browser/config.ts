@@ -43,7 +43,7 @@ export type ResolvedBrowserProfile = {
   cdpHost: string;
   cdpIsLoopback: boolean;
   color: string;
-  driver: "openclaw" | "extension";
+  driver: "blockclaw" | "extension";
 };
 
 function normalizeHexColor(raw: string | undefined) {
@@ -128,7 +128,7 @@ export function parseHttpUrl(raw: string, label: string) {
 }
 
 /**
- * Ensure the default "openclaw" profile exists in the profiles map.
+ * Ensure the default "blockclaw" profile exists in the profiles map.
  * Auto-creates it with the legacy CDP port (from browser.cdpUrl) or first port if missing.
  */
 function ensureDefaultProfile(
@@ -150,7 +150,7 @@ function ensureDefaultProfile(
 /**
  * Ensure a built-in "chrome" profile exists for the Chrome extension relay.
  *
- * Note: this is an OpenClaw browser profile (routing config), not a Chrome user profile.
+ * Note: this is an BlockClaw browser profile (routing config), not a Chrome user profile.
  * It points at the local relay CDP endpoint (controlPort + 1).
  */
 function ensureDefaultChromeExtensionProfile(
@@ -166,7 +166,7 @@ function ensureDefaultChromeExtensionProfile(
     return result;
   }
   // Avoid adding the built-in profile if the derived relay port is already used by another profile
-  // (legacy single-profile configs may use controlPort+1 for openclaw/openclaw CDP).
+  // (legacy single-profile configs may use controlPort+1 for blockclaw/blockclaw CDP).
   if (getUsedPorts(result).has(relayPort)) {
     return result;
   }
@@ -281,7 +281,7 @@ export function resolveProfile(
   let cdpHost = resolved.cdpHost;
   let cdpPort = profile.cdpPort ?? 0;
   let cdpUrl = "";
-  const driver = profile.driver === "extension" ? "extension" : "openclaw";
+  const driver = profile.driver === "extension" ? "extension" : "blockclaw";
 
   if (rawProfileUrl) {
     const parsed = parseHttpUrl(rawProfileUrl, `browser.profiles.${profileName}.cdpUrl`);

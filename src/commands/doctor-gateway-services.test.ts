@@ -84,7 +84,7 @@ async function runRepair(cfg: OpenClawConfig) {
 
 const gatewayProgramArguments = [
   "/usr/bin/node",
-  "/usr/local/bin/openclaw",
+  "/usr/local/bin/blockclaw",
   "gateway",
   "--port",
   "18789",
@@ -224,7 +224,7 @@ describe("maybeScanExtraGatewayServices", () => {
       "Legacy gateway removed",
     );
     expect(runtime.log).toHaveBeenCalledWith(
-      "Legacy gateway services removed. Installing OpenClaw gateway next.",
+      "Legacy gateway services removed. Installing BlockClaw gateway next.",
     );
   });
 });

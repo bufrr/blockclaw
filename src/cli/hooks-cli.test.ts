@@ -10,7 +10,7 @@ const report: HookStatusReport = {
     {
       name: "session-memory",
       description: "Save session context to memory",
-      source: "openclaw-bundled",
+      source: "blockclaw-bundled",
       pluginId: undefined,
       filePath: "/tmp/hooks/session-memory/HOOK.md",
       baseDir: "/tmp/hooks/session-memory",
@@ -48,7 +48,7 @@ describe("hooks cli formatting", () => {
         {
           name: "plugin-hook",
           description: "Hook from plugin",
-          source: "openclaw-plugin",
+          source: "blockclaw-plugin",
           pluginId: "voice-call",
           filePath: "/tmp/hooks/plugin-hook/HOOK.md",
           baseDir: "/tmp/hooks/plugin-hook",

@@ -854,7 +854,7 @@ export function isModelNotFoundErrorMessage(raw: string): boolean {
   }
   const lower = raw.toLowerCase();
 
-  // Direct pattern matches from OpenClaw internals and common providers.
+  // Direct pattern matches from BlockClaw internals and common providers.
   if (
     lower.includes("unknown model") ||
     lower.includes("model not found") ||

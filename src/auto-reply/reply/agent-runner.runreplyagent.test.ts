@@ -316,7 +316,7 @@ describe("runReplyAgent heartbeat followup guard", () => {
 describe("runReplyAgent typing (heartbeat)", () => {
   async function withTempStateDir<T>(fn: (stateDir: string) => Promise<T>): Promise<T> {
     return await withStateDirEnv(
-      "openclaw-typing-heartbeat-",
+      "blockclaw-typing-heartbeat-",
       async ({ stateDir }) => await fn(stateDir),
     );
   }
@@ -1441,7 +1441,7 @@ describe("runReplyAgent memory flush", () => {
   }
 
   beforeAll(async () => {
-    fixtureRoot = await fs.mkdtemp(path.join(tmpdir(), "openclaw-memory-flush-"));
+    fixtureRoot = await fs.mkdtemp(path.join(tmpdir(), "blockclaw-memory-flush-"));
   });
 
   afterAll(async () => {

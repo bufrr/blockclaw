@@ -455,7 +455,7 @@ describe("thread binding lifecycle", () => {
   it("persists touched activity timestamps across restart when persistence is enabled", async () => {
     vi.useFakeTimers();
     const previousStateDir = process.env.OPENCLAW_STATE_DIR;
-    const stateDir = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-thread-bindings-"));
+    const stateDir = fs.mkdtempSync(path.join(os.tmpdir(), "blockclaw-thread-bindings-"));
     process.env.OPENCLAW_STATE_DIR = stateDir;
     try {
       __testing.resetThreadBindingsForTests();
@@ -868,7 +868,7 @@ describe("thread binding lifecycle", () => {
 
   it("migrates legacy expiresAt bindings to idle/max-age semantics", () => {
     const previousStateDir = process.env.OPENCLAW_STATE_DIR;
-    const stateDir = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-thread-bindings-"));
+    const stateDir = fs.mkdtempSync(path.join(os.tmpdir(), "blockclaw-thread-bindings-"));
     process.env.OPENCLAW_STATE_DIR = stateDir;
     try {
       __testing.resetThreadBindingsForTests();
@@ -966,7 +966,7 @@ describe("thread binding lifecycle", () => {
 
   it("persists unbinds even when no manager is active", () => {
     const previousStateDir = process.env.OPENCLAW_STATE_DIR;
-    const stateDir = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-thread-bindings-"));
+    const stateDir = fs.mkdtempSync(path.join(os.tmpdir(), "blockclaw-thread-bindings-"));
     process.env.OPENCLAW_STATE_DIR = stateDir;
     try {
       __testing.resetThreadBindingsForTests();

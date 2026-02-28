@@ -33,7 +33,7 @@ vi.mock("../process/exec.js", () => ({
 
 let applyMediaUnderstanding: typeof import("./apply.js").applyMediaUnderstanding;
 
-const TEMP_MEDIA_PREFIX = "openclaw-media-";
+const TEMP_MEDIA_PREFIX = "blockclaw-media-";
 let suiteTempMediaRootDir = "";
 let tempMediaDirCounter = 0;
 

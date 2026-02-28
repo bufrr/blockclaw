@@ -24,8 +24,8 @@ export function getBearerToken(req: IncomingMessage): string | undefined {
 
 export function resolveAgentIdFromHeader(req: IncomingMessage): string | undefined {
   const raw =
-    getHeader(req, "x-openclaw-agent-id")?.trim() ||
-    getHeader(req, "x-openclaw-agent")?.trim() ||
+    getHeader(req, "x-blockclaw-agent-id")?.trim() ||
+    getHeader(req, "x-blockclaw-agent")?.trim() ||
     "";
   if (!raw) {
     return undefined;
@@ -68,7 +68,7 @@ export function resolveSessionKey(params: {
   user?: string | undefined;
   prefix: string;
 }): string {
-  const explicit = getHeader(params.req, "x-openclaw-session-key")?.trim();
+  const explicit = getHeader(params.req, "x-blockclaw-session-key")?.trim();
   if (explicit) {
     return explicit;
   }

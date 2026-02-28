@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { OpenClawSchema } from "./zod-schema.js";
 
-describe("OpenClawSchema logging levels", () => {
+describe("BlockClawSchema logging levels", () => {
   it("accepts valid logging level values for level and consoleLevel", () => {
     expect(() =>
       OpenClawSchema.parse({

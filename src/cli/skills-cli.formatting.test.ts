@@ -14,8 +14,8 @@ describe("skills-cli (e2e)", () => {
 
   beforeAll(() => {
     envSnapshot = captureEnv(["OPENCLAW_BUNDLED_SKILLS_DIR"]);
-    tempWorkspaceDir = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-skills-test-"));
-    tempBundledDir = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-bundled-skills-test-"));
+    tempWorkspaceDir = fs.mkdtempSync(path.join(os.tmpdir(), "blockclaw-skills-test-"));
+    tempBundledDir = fs.mkdtempSync(path.join(os.tmpdir(), "blockclaw-bundled-skills-test-"));
     process.env.OPENCLAW_BUNDLED_SKILLS_DIR = tempBundledDir;
   });
 
@@ -36,7 +36,7 @@ describe("skills-cli (e2e)", () => {
         skill: {
           name: "peekaboo",
           description: "Capture UI screenshots",
-          source: "openclaw-bundled",
+          source: "blockclaw-bundled",
           filePath: path.join(baseDir, "SKILL.md"),
           baseDir,
         } as SkillEntry["skill"],

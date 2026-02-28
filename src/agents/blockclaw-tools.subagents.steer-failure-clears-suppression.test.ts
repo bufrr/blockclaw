@@ -14,13 +14,13 @@ import {
 import "./test-helpers/fast-core-tools.js";
 import { createSubagentsTool } from "./tools/subagents-tool.js";
 
-describe("openclaw-tools: subagents steer failure", () => {
+describe("blockclaw-tools: subagents steer failure", () => {
   beforeEach(() => {
     resetSubagentRegistryForTests();
     callGatewayMock.mockClear();
     const storePath = path.join(
       os.tmpdir(),
-      `openclaw-subagents-steer-${Date.now()}-${Math.random().toString(16).slice(2)}.json`,
+      `blockclaw-subagents-steer-${Date.now()}-${Math.random().toString(16).slice(2)}.json`,
     );
     setSubagentsConfigOverride({
       session: {

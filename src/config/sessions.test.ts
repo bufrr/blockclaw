@@ -27,7 +27,7 @@ describe("sessions", () => {
   };
 
   beforeAll(async () => {
-    fixtureRoot = await fs.mkdtemp(path.join(os.tmpdir(), "openclaw-sessions-suite-"));
+    fixtureRoot = await fs.mkdtemp(path.join(os.tmpdir(), "blockclaw-sessions-suite-"));
   });
 
   afterAll(async () => {
@@ -91,11 +91,11 @@ describe("sessions", () => {
       buildGroupDisplayName({
         provider: "discord",
         groupChannel: "#general",
-        space: "friends-of-openclaw",
+        space: "friends-of-blockclaw",
         id: "123",
         key: "discord:group:123",
       }),
-    ).toBe("discord:friends-of-openclaw#general");
+    ).toBe("discord:friends-of-blockclaw#general");
   });
 
   const resolveSessionKeyCases = [
@@ -534,7 +534,7 @@ describe("sessions", () => {
   });
 
   it("resolves cross-agent absolute sessionFile paths", () => {
-    const stateDir = path.resolve("/home/user/.openclaw");
+    const stateDir = path.resolve("/home/user/.blockclaw");
     withStateDir(stateDir, () => {
       const bot2Session = path.join(stateDir, "agents", "bot2", "sessions", "sess-1.jsonl");
       // Agent bot1 resolves a sessionFile that belongs to agent bot2
@@ -599,7 +599,7 @@ describe("sessions", () => {
   });
 
   it("falls back to derived transcript path when sessionFile is outside agent sessions directories", () => {
-    withStateDir(path.resolve("/home/user/.openclaw"), () => {
+    withStateDir(path.resolve("/home/user/.blockclaw"), () => {
       const sessionFile = resolveSessionFilePath(
         "sess-1",
         { sessionFile: path.resolve("/etc/passwd") },
@@ -607,7 +607,7 @@ describe("sessions", () => {
       );
       expect(sessionFile).toBe(
         path.join(
-          path.resolve("/home/user/.openclaw"),
+          path.resolve("/home/user/.blockclaw"),
           "agents",
           "bot1",
           "sessions",

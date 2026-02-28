@@ -12,7 +12,7 @@ describe("config backup rotation", () => {
       if (!stateDir) {
         throw new Error("Expected OPENCLAW_STATE_DIR to be set by withTempHome");
       }
-      const configPath = path.join(stateDir, "openclaw.json");
+      const configPath = path.join(stateDir, "blockclaw.json");
       const buildConfig = (version: number): OpenClawConfig =>
         ({
           agents: { list: [{ id: `v${version}` }] },

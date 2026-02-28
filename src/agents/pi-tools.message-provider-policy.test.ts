@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { createOpenClawCodingTools } from "./pi-tools.js";
 
-describe("createOpenClawCodingTools message provider policy", () => {
+describe("createBlockClawCodingTools message provider policy", () => {
   it.each(["voice", "VOICE", " Voice "])(
     "does not expose tts tool for normalized voice provider: %s",
     (messageProvider) => {

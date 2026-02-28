@@ -96,7 +96,7 @@ async function expectSpawnUsesConfiguredModel(params: {
   });
 }
 
-describe("openclaw-tools: subagents (sessions_spawn model + thinking)", () => {
+describe("blockclaw-tools: subagents (sessions_spawn model + thinking)", () => {
   beforeEach(() => {
     resetSessionsSpawnConfigOverride();
     resetSubagentRegistryForTests();

@@ -104,8 +104,8 @@ describe("cli program (nodes media)", () => {
       .map((l) => l.replace(/^MEDIA:/, ""))
       .filter(Boolean);
     expect(mediaPaths).toHaveLength(2);
-    expect(mediaPaths[0]).toContain("openclaw-camera-snap-");
-    expect(mediaPaths[1]).toContain("openclaw-camera-snap-");
+    expect(mediaPaths[0]).toContain("blockclaw-camera-snap-");
+    expect(mediaPaths[1]).toContain("blockclaw-camera-snap-");
 
     try {
       // Content bytes are covered by single-output camera/file tests; here we

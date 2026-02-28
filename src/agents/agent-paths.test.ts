@@ -5,9 +5,9 @@ import { describe, expect, it } from "vitest";
 import { withEnv } from "../test-utils/env.js";
 import { resolveOpenClawAgentDir } from "./agent-paths.js";
 
-describe("resolveOpenClawAgentDir", () => {
+describe("resolveBlockClawAgentDir", () => {
   const withTempStateDir = async (run: (stateDir: string) => void) => {
-    const stateDir = await fs.mkdtemp(path.join(os.tmpdir(), "openclaw-agent-"));
+    const stateDir = await fs.mkdtemp(path.join(os.tmpdir(), "blockclaw-agent-"));
     try {
       run(stateDir);
     } finally {

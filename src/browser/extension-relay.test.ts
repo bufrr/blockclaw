@@ -213,8 +213,8 @@ describe("chrome extension relay server", () => {
     await ensureChromeExtensionRelayServer({ cdpUrl });
 
     const headers = getChromeExtensionRelayAuthHeaders(cdpUrl);
-    expect(Object.keys(headers)).toContain("x-openclaw-relay-token");
-    expect(headers["x-openclaw-relay-token"]).not.toBe(TEST_GATEWAY_TOKEN);
+    expect(Object.keys(headers)).toContain("x-blockclaw-relay-token");
+    expect(headers["x-blockclaw-relay-token"]).not.toBe(TEST_GATEWAY_TOKEN);
   });
 
   it("rejects CDP access without relay auth token", async () => {
@@ -264,14 +264,14 @@ describe("chrome extension relay server", () => {
       headers: {
         Origin: origin,
         "Access-Control-Request-Method": "GET",
-        "Access-Control-Request-Headers": "x-openclaw-relay-token",
+        "Access-Control-Request-Headers": "x-blockclaw-relay-token",
       },
     });
 
     expect(res.status).toBe(204);
     expect(res.headers.get("access-control-allow-origin")).toBe(origin);
     expect(res.headers.get("access-control-allow-headers") ?? "").toContain(
-      "x-openclaw-relay-token",
+      "x-blockclaw-relay-token",
     );
   });
 
@@ -459,7 +459,7 @@ describe("chrome extension relay server", () => {
     cdpUrl = `http://127.0.0.1:${port}`;
     await ensureChromeExtensionRelayServer({ cdpUrl });
 
-    const token = relayAuthHeaders(`ws://127.0.0.1:${port}/extension`)["x-openclaw-relay-token"];
+    const token = relayAuthHeaders(`ws://127.0.0.1:${port}/extension`)["x-blockclaw-relay-token"];
     expect(token).toBeTruthy();
     const ext = new WebSocket(
       `ws://127.0.0.1:${port}/extension?token=${encodeURIComponent(String(token))}`,
@@ -473,7 +473,7 @@ describe("chrome extension relay server", () => {
     cdpUrl = `http://127.0.0.1:${port}`;
     await ensureChromeExtensionRelayServer({ cdpUrl });
 
-    const token = relayAuthHeaders(cdpUrl)["x-openclaw-relay-token"];
+    const token = relayAuthHeaders(cdpUrl)["x-blockclaw-relay-token"];
     expect(token).toBeTruthy();
     const versionRes = await fetch(
       `${cdpUrl}/json/version?token=${encodeURIComponent(String(token))}`,
@@ -487,7 +487,7 @@ describe("chrome extension relay server", () => {
     await ensureChromeExtensionRelayServer({ cdpUrl });
 
     const versionRes = await fetch(`${cdpUrl}/json/version`, {
-      headers: { "x-openclaw-relay-token": TEST_GATEWAY_TOKEN },
+      headers: { "x-blockclaw-relay-token": TEST_GATEWAY_TOKEN },
     });
     expect(versionRes.status).toBe(200);
 
@@ -684,7 +684,7 @@ describe("chrome extension relay server", () => {
     let probeToken: string | undefined;
     const fakeRelay = createServer((req, res) => {
       if (req.url?.startsWith("/json/version")) {
-        const header = req.headers["x-openclaw-relay-token"];
+        const header = req.headers["x-blockclaw-relay-token"];
         probeToken = Array.isArray(header) ? header[0] : header;
         if (!probeToken) {
           res.writeHead(401);
@@ -692,7 +692,7 @@ describe("chrome extension relay server", () => {
           return;
         }
         res.writeHead(200, { "Content-Type": "application/json" });
-        res.end(JSON.stringify({ Browser: "OpenClaw/extension-relay" }));
+        res.end(JSON.stringify({ Browser: "BlockClaw/extension-relay" }));
         return;
       }
       if (req.url?.startsWith("/extension/status")) {
@@ -723,7 +723,7 @@ describe("chrome extension relay server", () => {
     }
   });
 
-  it("does not swallow EADDRINUSE when occupied port is not an openclaw relay", async () => {
+  it("does not swallow EADDRINUSE when occupied port is not an blockclaw relay", async () => {
     const port = await getFreePort();
     const blocker = createServer((_, res) => {
       res.writeHead(200, { "Content-Type": "text/plain; charset=utf-8" });

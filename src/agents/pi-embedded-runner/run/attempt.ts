@@ -1399,7 +1399,7 @@ export async function runEmbeddedAttempt(
 
         if (promptError && promptErrorSource === "prompt" && !compactionOccurredThisAttempt) {
           try {
-            sessionManager.appendCustomEntry("openclaw:prompt-error", {
+            sessionManager.appendCustomEntry("blockclaw:prompt-error", {
               timestamp: Date.now(),
               runId: params.runId,
               sessionId: params.sessionId,

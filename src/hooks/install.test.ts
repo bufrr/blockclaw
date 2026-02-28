@@ -12,7 +12,7 @@ import {
 } from "../test-utils/npm-spec-install-test-helpers.js";
 import { isAddressInUseError } from "./gmail-watcher.js";
 
-const fixtureRoot = path.join(os.tmpdir(), `openclaw-hook-install-${randomUUID()}`);
+const fixtureRoot = path.join(os.tmpdir(), `blockclaw-hook-install-${randomUUID()}`);
 let tempDirIndex = 0;
 
 const fixturesDir = path.resolve(process.cwd(), "test", "fixtures", "hooks-install");
@@ -174,7 +174,7 @@ describe("installHooksFromPath", () => {
         "---",
         "name: one-hook",
         "description: One hook",
-        'metadata: {"openclaw":{"events":["command:new"]}}',
+        'metadata: {"blockclaw":{"events":["command:new"]}}',
         "---",
         "",
         "# One Hook",
@@ -209,7 +209,7 @@ describe("installHooksFromPath", () => {
         "---",
         "name: my-hook",
         "description: My hook",
-        'metadata: {"openclaw":{"events":["command:new"]}}',
+        'metadata: {"blockclaw":{"events":["command:new"]}}',
         "---",
         "",
         "# My Hook",
@@ -259,7 +259,7 @@ describe("installHooksFromPath", () => {
     if (result.ok) {
       return;
     }
-    expect(result.error).toContain("openclaw.hooks entry escapes package directory");
+    expect(result.error).toContain("blockclaw.hooks entry escapes package directory");
   });
 
   it("rejects hook pack entries that escape via symlink", async () => {
@@ -296,7 +296,7 @@ describe("installHooksFromPath", () => {
     if (result.ok) {
       return;
     }
-    expect(result.error).toContain("openclaw.hooks entry resolves outside package directory");
+    expect(result.error).toContain("blockclaw.hooks entry resolves outside package directory");
   });
 });
 

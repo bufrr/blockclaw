@@ -683,7 +683,7 @@ describe("runMessageAction sandboxed media validation", () => {
     });
   });
 
-  it("allows media paths under preferred OpenClaw tmp root", async () => {
+  it("allows media paths under preferred BlockClaw tmp root", async () => {
     const tmpRoot = resolvePreferredOpenClawTmpDir();
     await fs.mkdir(tmpRoot, { recursive: true });
     const sandboxDir = await fs.mkdtemp(path.join(os.tmpdir(), "msg-sandbox-"));
@@ -708,7 +708,7 @@ describe("runMessageAction sandboxed media validation", () => {
       }
       // runMessageAction normalizes media paths through platform resolution.
       expect(result.sendResult?.mediaUrl).toBe(path.resolve(tmpFile));
-      const hostTmpOutsideOpenClaw = path.join(os.tmpdir(), "outside-openclaw", "test-media.png");
+      const hostTmpOutsideOpenClaw = path.join(os.tmpdir(), "outside-blockclaw", "test-media.png");
       await expect(
         runMessageAction({
           cfg: slackConfig,

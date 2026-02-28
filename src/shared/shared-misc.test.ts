@@ -66,14 +66,14 @@ describe("shared/frontmatter", () => {
     expect(parseFrontmatterBool(undefined, true)).toBe(true);
   });
 
-  test("resolveOpenClawManifestBlock parses JSON5 metadata and picks openclaw block", () => {
+  test("resolveBlockClawManifestBlock parses JSON5 metadata and picks blockclaw block", () => {
     const frontmatter = {
-      metadata: "{ openclaw: { foo: 1, bar: 'baz' } }",
+      metadata: "{ blockclaw: { foo: 1, bar: 'baz' } }",
     };
     expect(resolveOpenClawManifestBlock({ frontmatter })).toEqual({ foo: 1, bar: "baz" });
   });
 
-  test("resolveOpenClawManifestBlock returns undefined for invalid input", () => {
+  test("resolveBlockClawManifestBlock returns undefined for invalid input", () => {
     expect(resolveOpenClawManifestBlock({ frontmatter: {} })).toBeUndefined();
     expect(
       resolveOpenClawManifestBlock({ frontmatter: { metadata: "not-json5" } }),

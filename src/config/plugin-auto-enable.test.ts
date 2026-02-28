@@ -14,7 +14,7 @@ function makeRegistry(plugins: Array<{ id: string; channels: string[] }>): Plugi
       origin: "config" as const,
       rootDir: `/fake/${p.id}`,
       source: `/fake/${p.id}/index.js`,
-      manifestPath: `/fake/${p.id}/openclaw.plugin.json`,
+      manifestPath: `/fake/${p.id}/blockclaw.plugin.json`,
     })),
     diagnostics: [],
   };
@@ -115,7 +115,7 @@ describe("applyPluginAutoEnable", () => {
       config: {},
       env: {
         IRC_HOST: "irc.libera.chat",
-        IRC_NICK: "openclaw-bot",
+        IRC_NICK: "blockclaw-bot",
       },
     });
 

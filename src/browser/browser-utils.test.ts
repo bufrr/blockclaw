@@ -169,7 +169,7 @@ describe("cdp.helpers", () => {
 
   it("does not add relay header for unknown loopback ports", () => {
     const headers = getHeadersWithAuth("http://127.0.0.1:19444/json/version");
-    expect(headers["x-openclaw-relay-token"]).toBeUndefined();
+    expect(headers["x-blockclaw-relay-token"]).toBeUndefined();
   });
 
   it("adds relay header for known relay ports", async () => {
@@ -180,8 +180,8 @@ describe("cdp.helpers", () => {
     try {
       await ensureChromeExtensionRelayServer({ cdpUrl });
       const headers = getHeadersWithAuth(`${cdpUrl}/json/version`);
-      expect(headers["x-openclaw-relay-token"]).toBeTruthy();
-      expect(headers["x-openclaw-relay-token"]).not.toBe("test-gateway-token");
+      expect(headers["x-blockclaw-relay-token"]).toBeTruthy();
+      expect(headers["x-blockclaw-relay-token"]).not.toBe("test-gateway-token");
     } finally {
       await stopChromeExtensionRelayServer({ cdpUrl }).catch(() => {});
       if (prev === undefined) {
@@ -213,14 +213,14 @@ describe("fetchBrowserJson loopback auth (bridge auth registry)", () => {
 describe("browser server-context listKnownProfileNames", () => {
   it("includes configured and runtime-only profile names", () => {
     const resolved = resolveBrowserConfig({
-      defaultProfile: "openclaw",
+      defaultProfile: "blockclaw",
       profiles: {
         openclaw: { cdpPort: 18800, color: "#FF4500" },
       },
     });
-    const openclaw = resolveProfile(resolved, "openclaw");
+    const openclaw = resolveProfile(resolved, "blockclaw");
     if (!openclaw) {
-      throw new Error("expected openclaw profile");
+      throw new Error("expected blockclaw profile");
     }
 
     const state: BrowserServerState = {
@@ -240,7 +240,7 @@ describe("browser server-context listKnownProfileNames", () => {
 
     expect(listKnownProfileNames(state).toSorted()).toEqual([
       "chrome",
-      "openclaw",
+      "blockclaw",
       "stale-removed",
     ]);
   });

@@ -83,7 +83,7 @@ function makeMissingToolResult(params: {
     content: [
       {
         type: "text",
-        text: "[openclaw] missing tool result in session history; inserted synthetic error result for transcript repair.",
+        text: "[blockclaw] missing tool result in session history; inserted synthetic error result for transcript repair.",
       },
     ],
     isError: true,

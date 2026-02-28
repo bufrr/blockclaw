@@ -5,7 +5,7 @@ import { createOpenClawCodingTools } from "./pi-tools.js";
 
 const defaultTools = createOpenClawCodingTools({ senderIsOwner: true });
 
-describe("createOpenClawCodingTools", () => {
+describe("createBlockClawCodingTools", () => {
   it("preserves action enums in normalized schemas", () => {
     const toolNames = ["browser", "canvas", "nodes", "cron", "gateway", "message"];
 

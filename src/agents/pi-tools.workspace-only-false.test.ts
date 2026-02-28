@@ -10,7 +10,7 @@ describe("FS tools with workspaceOnly=false", () => {
   let outsideFile: string;
 
   beforeEach(async () => {
-    tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), "openclaw-test-"));
+    tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), "blockclaw-test-"));
     workspaceDir = path.join(tmpDir, "workspace");
     await fs.mkdir(workspaceDir);
     outsideFile = path.join(tmpDir, "outside.txt");

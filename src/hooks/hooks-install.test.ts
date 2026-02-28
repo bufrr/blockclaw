@@ -13,7 +13,7 @@ import { loadInternalHooks } from "./loader.js";
 const tempDirs: string[] = [];
 
 async function makeTempDir() {
-  const dir = await fs.mkdtemp(path.join(os.tmpdir(), "openclaw-hooks-e2e-"));
+  const dir = await fs.mkdtemp(path.join(os.tmpdir(), "blockclaw-hooks-e2e-"));
   tempDirs.push(dir);
   return dir;
 }
@@ -63,7 +63,7 @@ describe("hooks install (e2e)", () => {
         "---",
         'name: "hello-hook"',
         'description: "Test hook"',
-        'metadata: {"openclaw":{"events":["command:new"]}}',
+        'metadata: {"blockclaw":{"events":["command:new"]}}',
         "---",
         "",
         "# Hello Hook",

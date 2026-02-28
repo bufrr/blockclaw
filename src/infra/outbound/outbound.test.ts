@@ -43,7 +43,7 @@ describe("delivery-queue", () => {
   let tmpDir: string;
 
   beforeEach(() => {
-    tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-dq-test-"));
+    tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), "blockclaw-dq-test-"));
   });
 
   afterEach(() => {

@@ -35,7 +35,7 @@ vi.mock("node:fs", async (importOriginal) => {
 
 let ensureOpenClawCliOnPath: typeof import("./path-env.js").ensureOpenClawCliOnPath;
 
-describe("ensureOpenClawCliOnPath", () => {
+describe("ensureBlockClawCliOnPath", () => {
   const envKeys = [
     "PATH",
     "OPENCLAW_PATH_BOOTSTRAPPED",
@@ -72,10 +72,10 @@ describe("ensureOpenClawCliOnPath", () => {
     }
   });
 
-  it("prepends the bundled app bin dir when a sibling openclaw exists", () => {
-    const tmp = abs("/tmp/openclaw-path/case-bundled");
+  it("prepends the bundled app bin dir when a sibling blockclaw exists", () => {
+    const tmp = abs("/tmp/blockclaw-path/case-bundled");
     const appBinDir = path.join(tmp, "AppBin");
-    const cliPath = path.join(appBinDir, "openclaw");
+    const cliPath = path.join(appBinDir, "blockclaw");
     setDir(tmp);
     setDir(appBinDir);
     setExe(cliPath);
@@ -107,9 +107,9 @@ describe("ensureOpenClawCliOnPath", () => {
   });
 
   it("prepends mise shims when available", () => {
-    const tmp = abs("/tmp/openclaw-path/case-mise");
+    const tmp = abs("/tmp/blockclaw-path/case-mise");
     const appBinDir = path.join(tmp, "AppBin");
-    const appCli = path.join(appBinDir, "openclaw");
+    const appCli = path.join(appBinDir, "blockclaw");
     setDir(tmp);
     setDir(appBinDir);
     setExe(appCli);
@@ -139,15 +139,15 @@ describe("ensureOpenClawCliOnPath", () => {
   });
 
   it("only appends project-local node_modules/.bin when explicitly enabled", () => {
-    const tmp = abs("/tmp/openclaw-path/case-project-local");
+    const tmp = abs("/tmp/blockclaw-path/case-project-local");
     const appBinDir = path.join(tmp, "AppBin");
-    const appCli = path.join(appBinDir, "openclaw");
+    const appCli = path.join(appBinDir, "blockclaw");
     setDir(tmp);
     setDir(appBinDir);
     setExe(appCli);
 
     const localBinDir = path.join(tmp, "node_modules", ".bin");
-    const localCli = path.join(localBinDir, "openclaw");
+    const localCli = path.join(localBinDir, "blockclaw");
     setDir(path.join(tmp, "node_modules"));
     setDir(localBinDir);
     setExe(localCli);
@@ -182,7 +182,7 @@ describe("ensureOpenClawCliOnPath", () => {
   });
 
   it("prepends Linuxbrew dirs when present", () => {
-    const tmp = abs("/tmp/openclaw-path/case-linuxbrew");
+    const tmp = abs("/tmp/blockclaw-path/case-linuxbrew");
     const execDir = path.join(tmp, "exec");
     setDir(tmp);
     setDir(execDir);

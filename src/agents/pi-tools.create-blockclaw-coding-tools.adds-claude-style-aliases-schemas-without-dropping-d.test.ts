@@ -13,12 +13,12 @@ const tinyPngBuffer = Buffer.from(
   "base64",
 );
 
-describe("createOpenClawCodingTools", () => {
+describe("createBlockClawCodingTools", () => {
   it("returns image metadata for images and text-only blocks for text files", async () => {
     const readTool = defaultTools.find((tool) => tool.name === "read");
     expect(readTool).toBeDefined();
 
-    const tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), "openclaw-read-"));
+    const tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), "blockclaw-read-"));
     try {
       const imagePath = path.join(tmpDir, "sample.png");
       await fs.writeFile(imagePath, tinyPngBuffer);
@@ -38,7 +38,7 @@ describe("createOpenClawCodingTools", () => {
       expect(image?.mimeType).toBe("image/png");
 
       const textPath = path.join(tmpDir, "sample.txt");
-      const contents = "Hello from openclaw read tool.";
+      const contents = "Hello from blockclaw read tool.";
       await fs.writeFile(textPath, contents, "utf8");
 
       const textResult = await readTool?.execute("tool-2", {

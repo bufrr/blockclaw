@@ -28,7 +28,7 @@ describe("runCapability video provider wiring", () => {
     let seenBaseUrl: string | undefined;
     let seenHeaders: Record<string, string> | undefined;
 
-    await withVideoFixture("openclaw-video-merge", async ({ ctx, media, cache }) => {
+    await withVideoFixture("blockclaw-video-merge", async ({ ctx, media, cache }) => {
       const cfg = {
         models: {
           providers: {
@@ -99,7 +99,7 @@ describe("runCapability video provider wiring", () => {
         MOONSHOT_API_KEY: undefined,
       },
       async () => {
-        await withVideoFixture("openclaw-video-auto-moonshot", async ({ ctx, media, cache }) => {
+        await withVideoFixture("blockclaw-video-auto-moonshot", async ({ ctx, media, cache }) => {
           const cfg = {
             models: {
               providers: {
